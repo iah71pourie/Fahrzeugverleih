@@ -49,9 +49,9 @@ namespace Fahrzeugverleih
             get { return anschaffungspreis; }
             set { anschaffungspreis = value; }
         }
-        public virtual int SteuerschuldBerechnen
+        public virtual double SteuerschuldBerechnen
         {
-            get { return 0; }
+            get { return 0.0; }
         }
         #endregion        
     }

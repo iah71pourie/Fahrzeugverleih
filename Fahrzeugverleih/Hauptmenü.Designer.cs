@@ -55,6 +55,7 @@
             this.fahrzeugeListBox.Name = "fahrzeugeListBox";
             this.fahrzeugeListBox.Size = new System.Drawing.Size(245, 382);
             this.fahrzeugeListBox.TabIndex = 1;
+            this.fahrzeugeListBox.DoubleClick += new System.EventHandler(this.fahrzeugeListBox_DoubleClick);
             // 
             // fahrzeugLöschenButton
             // 
@@ -89,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(548, 401);
+            this.ClientSize = new System.Drawing.Size(549, 401);
             this.Controls.Add(this.sucheLabel);
             this.Controls.Add(this.sucheTextBox);
             this.Controls.Add(this.fahrzeugLöschenButton);

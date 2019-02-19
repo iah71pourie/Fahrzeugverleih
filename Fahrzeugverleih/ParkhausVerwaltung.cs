@@ -49,7 +49,7 @@ namespace Fahrzeugverleih
                     }
                 }
             }
-            else if (fahrzeug is Motorad)
+            else if (fahrzeug is Motorrad)
             {
                 foreach (Parkhaus parkhaus in parkhäuser)
                 {

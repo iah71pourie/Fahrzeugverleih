@@ -35,7 +35,7 @@ namespace Fahrzeugverleih
             get { return schadstoffklasse; }
             set { schadstoffklasse = value; }
         }
-        public override int SteuerschuldBerechnen
+        public override double SteuerschuldBerechnen
         {
             get { return ((hubraum + 99) / 100) * 10 * (schadstoffklasse + 1); }
         }

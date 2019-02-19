@@ -28,7 +28,7 @@ namespace Fahrzeugverleih
                     break;
 
                 case ParkplatzTyp.Motorad:
-                    fahrzeug = new Motorad();
+                    fahrzeug = new Motorrad();
                     stellplatznummer = "M";
                     break;
             }

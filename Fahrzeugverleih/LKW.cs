@@ -28,7 +28,7 @@ namespace Fahrzeugverleih
             get { return zuladung; }
             set { zuladung = value; }
         }
-        public override int SteuerschuldBerechnen
+        public override double SteuerschuldBerechnen
         {
             get { return zuladung * 100; }
         }

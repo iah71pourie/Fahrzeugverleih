@@ -11,11 +11,11 @@ using Fahrzeugverleih;
 
 namespace Fahrzeugverleih
 {
-    public partial class FahrzeugErstellenForm : Form
+    public partial class FahrzeugBearbeiten : Form
     {
         private Fahrzeug fahrzeug;
 
-        public FahrzeugErstellenForm()
+        public FahrzeugBearbeiten()
         {
             InitializeComponent();
             
@@ -43,10 +43,16 @@ namespace Fahrzeugverleih
         public Fahrzeug Fahrzeug
         {
             get { return fahrzeug; }
+            set { fahrzeug = value; }
         }
         #endregion
 
-        private void fahrzeugErstellenButton_Click(object sender, EventArgs e)
+        private void FahrzeugErstellenForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fahrzeugLöschenButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }

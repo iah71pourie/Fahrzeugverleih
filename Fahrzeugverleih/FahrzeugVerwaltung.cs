@@ -37,22 +37,20 @@ namespace Fahrzeugverleih
         }
         public List<Fahrzeug> FahrzeugSuchen(string kennzeichen)
         {
-            List<Fahrzeug> Ergebnisse;
+            List<Fahrzeug> Ergebnisse = new List<Fahrzeug>();
+
             foreach (Fahrzeug fahrzeug in fahrzeuge)
             {
                 if (fahrzeug.Kennzeichen.Contains(kennzeichen))
-                {
-
-                }
                     Ergebnisse.Add(fahrzeug);
             }
-            return null;
+            return Ergebnisse;
         }
-        public int GesammteSteuerschuldBerechnen()
+        public double GesammteSteuerschuldBerechnen()
         {
-            int steuerschuld = 0;
+            double steuerschuld = 0.0;
 
-            foreach(Fahrzeug fahrzeug in fahrzeuge)
+            foreach (Fahrzeug fahrzeug in fahrzeuge)
             {
                 steuerschuld += fahrzeug.SteuerschuldBerechnen;
             }

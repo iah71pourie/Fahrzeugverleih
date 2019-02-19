@@ -34,7 +34,7 @@ namespace Fahrzeugverleih
                     }
                     else
                     {
-                        writer.Write((fahrzeug as Motorad).Hubraum.ToString() + ";");
+                        writer.Write((fahrzeug as Motorrad).Hubraum.ToString() + ";");
                     }
 
                     writer.WriteLine();
@@ -114,14 +114,14 @@ namespace Fahrzeugverleih
 
                     case 6:
 
-                        fahrzeug = new Motorad();
+                        fahrzeug = new Motorrad();
 
                         fahrzeug.Hersteller = ZeilenInhalt[0];
                         fahrzeug.Modell = ZeilenInhalt[1];
                         fahrzeug.Kennzeichen = ZeilenInhalt[2];
                         fahrzeug.Zulassungsjahr = Convert.ToDateTime(ZeilenInhalt[3]);
                         fahrzeug.Anschaffungspreis = Convert.ToInt32(ZeilenInhalt[4]);
-                        (fahrzeug as Motorad).Hubraum = Convert.ToInt32(ZeilenInhalt[5]);
+                        (fahrzeug as Motorrad).Hubraum = Convert.ToInt32(ZeilenInhalt[5]);
 
                         break;
 
@@ -214,14 +214,14 @@ namespace Fahrzeugverleih
 
                         case 6:
 
-                            parkhaus.Parkplätze[i].Fahrzeug = new Motorad();
+                            parkhaus.Parkplätze[i].Fahrzeug = new Motorrad();
 
                             parkhaus.Parkplätze[i].Fahrzeug.Hersteller = ParkhausZeilenInhalt[0];
                             parkhaus.Parkplätze[i].Fahrzeug.Modell = ParkhausZeilenInhalt[1];
                             parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen = ParkhausZeilenInhalt[2];
                             parkhaus.Parkplätze[i].Fahrzeug.Zulassungsjahr = Convert.ToDateTime(ParkhausZeilenInhalt[3]);
                             parkhaus.Parkplätze[i].Fahrzeug.Anschaffungspreis = Convert.ToInt32(ParkhausZeilenInhalt[4]);
-                            (parkhaus.Parkplätze[i].Fahrzeug as Motorad).Hubraum = Convert.ToInt32(ParkhausZeilenInhalt[5]);
+                            (parkhaus.Parkplätze[i].Fahrzeug as Motorrad).Hubraum = Convert.ToInt32(ParkhausZeilenInhalt[5]);
 
                             break;
 

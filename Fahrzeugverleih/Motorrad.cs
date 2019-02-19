@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Fahrzeugverleih
 {
-    class Motorad : Fahrzeug
+    class Motorrad : Fahrzeug
     {
         private int hubraum;
 
-        public Motorad()
+        public Motorrad()
         {
             hubraum = 0;
         }
@@ -21,7 +21,7 @@ namespace Fahrzeugverleih
             get { return hubraum; }
             set { hubraum = value; }
         }
-        public override int SteuerschuldBerechnen
+        public override double SteuerschuldBerechnen
         {
             get { return (hubraum + 99) / 100 * 20; }
         }
