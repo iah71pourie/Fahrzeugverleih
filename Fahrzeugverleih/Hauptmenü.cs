@@ -10,10 +10,12 @@ using System.Windows.Forms;
 
 namespace Fahrzeugverleih
 {
+    // DATA GRID VIEW
     public partial class HauptmenüForm : Form
     {
         FahrzeugVerwaltung fahrzeugVerwaltung;
         ParkhausVerwaltung parkhausVerwaltung;
+        DateiVerwaltung dateiVerwaltung;
 
         public HauptmenüForm()
         {
@@ -21,6 +23,7 @@ namespace Fahrzeugverleih
 
             fahrzeugVerwaltung = new FahrzeugVerwaltung();
             parkhausVerwaltung = new ParkhausVerwaltung();
+            dateiVerwaltung = new DateiVerwaltung();
         }
 
         #region Methoden
@@ -39,18 +42,39 @@ namespace Fahrzeugverleih
         {
             fahrzeugeListBoxHinzufügen(fahrzeugVerwaltung.Fahrzeuge);
         }
+        private void HauptmenüForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
 
         private void fahrzeugErstellenButton_Click(object sender, EventArgs e)
         {
-            using (FahrzeugBearbeiten fahrzeugBearbeitenForm = new FahrzeugBearbeiten())
+            using (FahrzeugErstellen fahrzeugErstellenForm = new FahrzeugErstellen())
             {
-                fahrzeugBearbeitenForm.ShowDialog();
+                bool kennzeichenVorhanden;
 
-                if (fahrzeugBearbeitenForm.Fahrzeug != null)
+                do
                 {
-                    fahrzeugVerwaltung.FahrzeugHinzufügen(fahrzeugBearbeitenForm.Fahrzeug);
-                    fahrzeugeListBox.Items.Add(fahrzeugBearbeitenForm.Fahrzeug);
+                    kennzeichenVorhanden = false;
+
+                    fahrzeugErstellenForm.ShowDialog();
+
+                    if (fahrzeugErstellenForm.Fahrzeug != null)
+                    {
+                        foreach (Fahrzeug fahrzeug in fahrzeugVerwaltung.Fahrzeuge)
+                        {
+                            if (fahrzeug.Kennzeichen == fahrzeugErstellenForm.Fahrzeug.Kennzeichen)
+                                kennzeichenVorhanden = true;
+                        }
+
+                        if (!kennzeichenVorhanden)
+                        {
+                            fahrzeugVerwaltung.FahrzeugHinzufügen(fahrzeugErstellenForm.Fahrzeug);
+                            fahrzeugeListBox.Items.Add(fahrzeugErstellenForm.Fahrzeug);
+                        }
+                    }
                 }
+                while (kennzeichenVorhanden);
             }
         }
 
@@ -61,7 +85,7 @@ namespace Fahrzeugverleih
 
         private void fahrzeugeListBox_DoubleClick(object sender, EventArgs e)
         {
-            using (FahrzeugBearbeiten fahrzeugBearbeitenForm = new FahrzeugBearbeiten())
+            /*using (FahrzeugBearbeiten fahrzeugBearbeitenForm = new FahrzeugBearbeiten())
             {
                 fahrzeugBearbeitenForm.Fahrzeug = (fahrzeugeListBox.SelectedItem as Fahrzeug);
 
@@ -69,14 +93,14 @@ namespace Fahrzeugverleih
 
                 for (int i = 0; i < fahrzeugVerwaltung.Fahrzeuge.Count; i++)
                 {
-                    if(fahrzeugVerwaltung.Fahrzeuge[i] == (fahrzeugeListBox.SelectedItem as Fahrzeug))
+                    if (fahrzeugVerwaltung.Fahrzeuge[i] == (fahrzeugeListBox.SelectedItem as Fahrzeug))
                     {
                         fahrzeugVerwaltung.Fahrzeuge[i] = fahrzeugBearbeitenForm.Fahrzeug;
                         sucheTextBox.Text = "";
                         fahrzeugeListBoxHinzufügen(fahrzeugVerwaltung.Fahrzeuge);
                     }
                 }
-            }
+            }*/
         }
     }
 }

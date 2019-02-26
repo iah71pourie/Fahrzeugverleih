@@ -97,7 +97,9 @@
             this.Controls.Add(this.fahrzeugeListBox);
             this.Controls.Add(this.fahrzeugErstellenButton);
             this.Name = "HauptmenüForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto Verleih Hauptmenü";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HauptmenüForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
