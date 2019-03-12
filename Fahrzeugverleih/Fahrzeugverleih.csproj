@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="DateiVerwaltung.cs" />
     <Compile Include="Fahrzeug.cs" />
+    <Compile Include="FahrzeugBearbeiten.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FahrzeugBearbeiten.Designer.cs">
+      <DependentUpon>FahrzeugBearbeiten.cs</DependentUpon>
+    </Compile>
     <Compile Include="FahrzeugErstellen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="PKW.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FahrzeugBearbeiten.resx">
+      <DependentUpon>FahrzeugBearbeiten.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FahrzeugErstellen.resx">
       <DependentUpon>FahrzeugErstellen.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +105,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,9 +13,8 @@ namespace Fahrzeugverleih
         private List<Fahrzeug> fahrzeuge = new List<Fahrzeug>();
         private List<Parkhaus> parkhäuser = new List<Parkhaus>();
 
-        public void Speichern(List<Fahrzeug> fahrzeuge, List<Parkhaus> parkhäuser)
+        public void FahrzeugeSpeichern(List<Fahrzeug> fahrzeuge)
         {
-            #region Fahrzeuge
             using (StreamWriter writer = new StreamWriter(@"fahrzeuge.txt"))
             {
                 foreach (Fahrzeug fahrzeug in fahrzeuge)
@@ -40,9 +39,9 @@ namespace Fahrzeugverleih
                     writer.WriteLine();
                 }
             }
-            #endregion
-
-            #region Parkhäuser
+        }
+        public void ParkhäuserSpeichern(List<Parkhaus> parkhäuser)
+        {
             using (StreamWriter writer = new StreamWriter(@"parkhäuser.txt"))
             {
                 foreach (Parkhaus parkhaus in parkhäuser)
@@ -71,8 +70,8 @@ namespace Fahrzeugverleih
                     }
                 }
             }
-            #endregion
         }
+
         public List<Fahrzeug> FahrzeugeAuslesen()
         {
             string[] DateiInhalt = File.ReadAllLines(@"fahrzeuge.txt");

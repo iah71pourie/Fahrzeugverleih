@@ -7,18 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Fahrzeugverleih;
 
 namespace Fahrzeugverleih
 {
-    public partial class FahrzeugErstellen : Form
+    public partial class FahrzeugBearbeiten : Form
     {
         private Fahrzeug fahrzeug;
 
-        public FahrzeugErstellen()
+        public FahrzeugBearbeiten()
         {
             InitializeComponent();
-            
+
             herstellerComboBox.Items.AddRange(new string[] {
             "Audi",
             "Abarth",
@@ -61,14 +60,42 @@ namespace Fahrzeugverleih
             "Volkswagen",
             "Volvo" });
         }
-
-        #region Eigenschaften
+        
         public Fahrzeug Fahrzeug
         {
             get { return fahrzeug; }
+            set { fahrzeug = value; }
         }
-        #endregion
 
+        private void FahrzeugBearbeiten_Load(object sender, EventArgs e)
+        {
+            if (fahrzeug is PKW)
+            {
+                fahrzeugArtComboBox.SelectedIndex = 0;
+                this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
+                hubraumTextBox.Text = (fahrzeug as PKW).Hubraum.ToString();
+                leistungTextBox.Text = (fahrzeug as PKW).Leistung.ToString();
+                schadstoffklasseComboBox.Text = (fahrzeug as PKW).Schadstoffklasse.ToString();
+            }
+            else if (fahrzeug is LKW)
+            {
+                fahrzeugArtComboBox.SelectedIndex = 1;
+                this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
+                achsenanzahlTextBox.Text = (fahrzeug as LKW).AchsenAnzahl.ToString();
+                zuladungTextBox.Text = (fahrzeug as LKW).Zuladung.ToString();
+            }
+            else if (fahrzeug is Motorrad)
+            {
+                fahrzeugArtComboBox.SelectedIndex = 2;
+                this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
+                hubraumTextBox.Text = (fahrzeug as Motorrad).Hubraum.ToString();
+            }
+            kennzeichenMaskedTextBox.Text = fahrzeug.Kennzeichen;
+            herstellerComboBox.Text = fahrzeug.Hersteller;
+            modellTextBox.Text = fahrzeug.Modell;
+            anschaffungspreisTextBox.Text = fahrzeug.Anschaffungspreis.ToString();
+            zulassungsjahrMaskedTextBox.Text = fahrzeug.Zulassungsjahr.ToString();
+        }
         private void fahrzeugArtComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             #region Alle Controlls entfernen
