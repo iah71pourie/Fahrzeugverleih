@@ -17,6 +17,7 @@ namespace Fahrzeugverleih
         ParkhausVerwaltung parkhausVerwaltung;
 
         DateiVerwaltung dateiVerwaltung;
+        CurrencyManager currencyManager;
 
         public HauptmenüForm()
         {
@@ -26,23 +27,16 @@ namespace Fahrzeugverleih
             parkhausVerwaltung = new ParkhausVerwaltung();
 
             dateiVerwaltung = new DateiVerwaltung();
-        }
-        
-        public void fahrzeugeListBoxUpdaten(List<Fahrzeug> fahrzeuge)
-        {
-            fahrzeugeListBox.Items.Clear();
+            dataGridView1.DataSource = fahrzeugVerwaltung.Fahrzeuge;
+            currencyManager = (CurrencyManager)dataGridView1.BindingContext[fahrzeugVerwaltung.Fahrzeuge];
 
-            foreach (Fahrzeug fahrzeug in fahrzeuge)
-            {
-                fahrzeugeListBox.Items.Add(fahrzeug.Kennzeichen);
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             fahrzeugVerwaltung.Fahrzeuge.AddRange(dateiVerwaltung.FahrzeugeAuslesen());
 
-            fahrzeugeListBoxUpdaten(fahrzeugVerwaltung.Fahrzeuge);
+            currencyManager.Refresh();
         }
         private void HauptmenüForm_FormClosing(object sender, FormClosingEventArgs e)
         {
