@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.fahrzeugErstellenButton = new System.Windows.Forms.Button();
             this.fahrzeugLöschenButton = new System.Windows.Forms.Button();
             this.sucheTextBox = new System.Windows.Forms.TextBox();
@@ -37,24 +38,24 @@
             this.parkhausErstellenButton = new System.Windows.Forms.Button();
             this.parkhäuserGroupBox = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.fahrzeugeTabPage = new System.Windows.Forms.TabPage();
+            this.fahrzeugeDataGridView = new System.Windows.Forms.DataGridView();
+            this.parkhäuserTabPage = new System.Windows.Forms.TabPage();
             this.parkhäuserGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.fahrzeugeTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fahrzeugeDataGridView)).BeginInit();
+            this.parkhäuserTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // fahrzeugErstellenButton
             // 
             this.fahrzeugErstellenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fahrzeugErstellenButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fahrzeugErstellenButton.Location = new System.Drawing.Point(6, 204);
+            this.fahrzeugErstellenButton.Location = new System.Drawing.Point(843, 387);
             this.fahrzeugErstellenButton.Name = "fahrzeugErstellenButton";
-            this.fahrzeugErstellenButton.Size = new System.Drawing.Size(140, 34);
-            this.fahrzeugErstellenButton.TabIndex = 0;
+            this.fahrzeugErstellenButton.Size = new System.Drawing.Size(115, 50);
+            this.fahrzeugErstellenButton.TabIndex = 2;
             this.fahrzeugErstellenButton.Text = "Fahrzeug erstellen";
             this.fahrzeugErstellenButton.UseVisualStyleBackColor = true;
             this.fahrzeugErstellenButton.Click += new System.EventHandler(this.fahrzeugErstellenButton_Click);
@@ -63,10 +64,10 @@
             // 
             this.fahrzeugLöschenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fahrzeugLöschenButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fahrzeugLöschenButton.Location = new System.Drawing.Point(6, 244);
+            this.fahrzeugLöschenButton.Location = new System.Drawing.Point(971, 387);
             this.fahrzeugLöschenButton.Name = "fahrzeugLöschenButton";
-            this.fahrzeugLöschenButton.Size = new System.Drawing.Size(140, 34);
-            this.fahrzeugLöschenButton.TabIndex = 2;
+            this.fahrzeugLöschenButton.Size = new System.Drawing.Size(115, 50);
+            this.fahrzeugLöschenButton.TabIndex = 3;
             this.fahrzeugLöschenButton.Text = "Fahrzeug löschen";
             this.fahrzeugLöschenButton.UseVisualStyleBackColor = true;
             this.fahrzeugLöschenButton.Click += new System.EventHandler(this.fahrzeugLöschenButton_Click);
@@ -75,10 +76,10 @@
             // 
             this.sucheTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sucheTextBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.sucheTextBox.Location = new System.Drawing.Point(6, 24);
+            this.sucheTextBox.Location = new System.Drawing.Point(843, 30);
             this.sucheTextBox.Name = "sucheTextBox";
-            this.sucheTextBox.Size = new System.Drawing.Size(140, 26);
-            this.sucheTextBox.TabIndex = 3;
+            this.sucheTextBox.Size = new System.Drawing.Size(237, 26);
+            this.sucheTextBox.TabIndex = 1;
             this.sucheTextBox.TextChanged += new System.EventHandler(this.sucheTextBox_TextChanged);
             // 
             // sucheLabel
@@ -86,7 +87,7 @@
             this.sucheLabel.AutoSize = true;
             this.sucheLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sucheLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.sucheLabel.Location = new System.Drawing.Point(6, 3);
+            this.sucheLabel.Location = new System.Drawing.Point(840, 9);
             this.sucheLabel.Name = "sucheLabel";
             this.sucheLabel.Size = new System.Drawing.Size(143, 18);
             this.sucheLabel.TabIndex = 4;
@@ -141,54 +142,75 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(3, 2);
+            this.tabControl1.Controls.Add(this.fahrzeugeTabPage);
+            this.tabControl1.Controls.Add(this.parkhäuserTabPage);
+            this.tabControl1.Location = new System.Drawing.Point(-3, -2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1094, 592);
+            this.tabControl1.Size = new System.Drawing.Size(1104, 474);
             this.tabControl1.TabIndex = 12;
             // 
-            // tabPage1
+            // fahrzeugeTabPage
             // 
-            this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Controls.Add(this.fahrzeugErstellenButton);
-            this.tabPage1.Controls.Add(this.sucheLabel);
-            this.tabPage1.Controls.Add(this.fahrzeugLöschenButton);
-            this.tabPage1.Controls.Add(this.sucheTextBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1086, 566);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.fahrzeugeTabPage.Controls.Add(this.fahrzeugeDataGridView);
+            this.fahrzeugeTabPage.Controls.Add(this.fahrzeugErstellenButton);
+            this.fahrzeugeTabPage.Controls.Add(this.sucheLabel);
+            this.fahrzeugeTabPage.Controls.Add(this.fahrzeugLöschenButton);
+            this.fahrzeugeTabPage.Controls.Add(this.sucheTextBox);
+            this.fahrzeugeTabPage.Location = new System.Drawing.Point(4, 22);
+            this.fahrzeugeTabPage.Name = "fahrzeugeTabPage";
+            this.fahrzeugeTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.fahrzeugeTabPage.Size = new System.Drawing.Size(1096, 448);
+            this.fahrzeugeTabPage.TabIndex = 0;
+            this.fahrzeugeTabPage.Text = "Fahrzeuge";
+            this.fahrzeugeTabPage.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // fahrzeugeDataGridView
             // 
-            this.tabPage2.Controls.Add(this.parkhäuserGroupBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1086, 566);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.fahrzeugeDataGridView.AllowUserToAddRows = false;
+            this.fahrzeugeDataGridView.AllowUserToDeleteRows = false;
+            this.fahrzeugeDataGridView.AllowUserToResizeColumns = false;
+            this.fahrzeugeDataGridView.AllowUserToResizeRows = false;
+            this.fahrzeugeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.fahrzeugeDataGridView.ColumnHeadersHeight = 25;
+            this.fahrzeugeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.fahrzeugeDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            this.fahrzeugeDataGridView.Location = new System.Drawing.Point(6, 9);
+            this.fahrzeugeDataGridView.MultiSelect = false;
+            this.fahrzeugeDataGridView.Name = "fahrzeugeDataGridView";
+            this.fahrzeugeDataGridView.ReadOnly = true;
+            this.fahrzeugeDataGridView.RowHeadersVisible = false;
+            this.fahrzeugeDataGridView.RowHeadersWidth = 20;
+            this.fahrzeugeDataGridView.RowTemplate.Height = 25;
+            this.fahrzeugeDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.fahrzeugeDataGridView.Size = new System.Drawing.Size(831, 428);
+            this.fahrzeugeDataGridView.TabIndex = 0;
+            this.fahrzeugeDataGridView.DoubleClick += new System.EventHandler(this.fahrzeugeDataGridView_DoubleClick);
             // 
-            // dataGridView1
+            // parkhäuserTabPage
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(156, 7);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 5;
+            this.parkhäuserTabPage.Controls.Add(this.parkhäuserGroupBox);
+            this.parkhäuserTabPage.Location = new System.Drawing.Point(4, 22);
+            this.parkhäuserTabPage.Name = "parkhäuserTabPage";
+            this.parkhäuserTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.parkhäuserTabPage.Size = new System.Drawing.Size(1098, 442);
+            this.parkhäuserTabPage.TabIndex = 1;
+            this.parkhäuserTabPage.Text = "Parkhäuser";
+            this.parkhäuserTabPage.UseVisualStyleBackColor = true;
             // 
             // HauptmenüForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1099, 597);
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ClientSize = new System.Drawing.Size(1099, 469);
             this.Controls.Add(this.tabControl1);
             this.Name = "HauptmenüForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -197,10 +219,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.parkhäuserGroupBox.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.fahrzeugeTabPage.ResumeLayout(false);
+            this.fahrzeugeTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fahrzeugeDataGridView)).EndInit();
+            this.parkhäuserTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -216,9 +238,9 @@
         private System.Windows.Forms.Button parkhausErstellenButton;
         private System.Windows.Forms.GroupBox parkhäuserGroupBox;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage fahrzeugeTabPage;
+        private System.Windows.Forms.DataGridView fahrzeugeDataGridView;
+        private System.Windows.Forms.TabPage parkhäuserTabPage;
     }
 }
 

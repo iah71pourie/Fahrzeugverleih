@@ -15,7 +15,7 @@ namespace Fahrzeugverleih
 
         public void FahrzeugeSpeichern(List<Fahrzeug> fahrzeuge)
         {
-            using (StreamWriter writer = new StreamWriter(@"fahrzeuge.txt"))
+            using (StreamWriter writer = new StreamWriter(@"fahrzeuge.txt", false))
             {
                 foreach (Fahrzeug fahrzeug in fahrzeuge)
                 {
@@ -42,7 +42,7 @@ namespace Fahrzeugverleih
         }
         public void ParkhäuserSpeichern(List<Parkhaus> parkhäuser)
         {
-            using (StreamWriter writer = new StreamWriter(@"parkhäuser.txt"))
+            using (StreamWriter writer = new StreamWriter(@"parkhäuser.txt", false))
             {
                 foreach (Parkhaus parkhaus in parkhäuser)
                 {
@@ -84,7 +84,7 @@ namespace Fahrzeugverleih
 
                 switch (ZeilenInhalt.Length)
                 {
-                    case 8:
+                    case 9:
 
                         fahrzeug = new PKW();
 
@@ -98,7 +98,7 @@ namespace Fahrzeugverleih
                         (fahrzeug as PKW).Schadstoffklasse = Convert.ToInt32(ZeilenInhalt[7]);
                         break;
 
-                    case 7:
+                    case 8:
 
                         fahrzeug = new LKW();
 
@@ -111,7 +111,7 @@ namespace Fahrzeugverleih
                         (fahrzeug as LKW).AchsenAnzahl = Convert.ToInt32(ZeilenInhalt[6]);
                         break;
 
-                    case 6:
+                    case 7:
 
                         fahrzeug = new Motorrad();
 
@@ -131,7 +131,10 @@ namespace Fahrzeugverleih
                 }
 
                 if (fahrzeug != null)
+                {
                     fahrzeuge.Add(fahrzeug);
+                    fahrzeug = null;
+                }
                 else
                     MessageBox.Show("Daten sind Fehlerhaft");
             }

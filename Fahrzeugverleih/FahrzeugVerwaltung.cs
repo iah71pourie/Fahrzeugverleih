@@ -11,20 +11,15 @@ namespace Fahrzeugverleih
     {
         private List<Fahrzeug> fahrzeuge;
 
-        DateiVerwaltung dateiVerwaltung;
         public FahrzeugVerwaltung()
         {
-            dateiVerwaltung = new DateiVerwaltung();
-
-            fahrzeuge = dateiVerwaltung.FahrzeugeAuslesen();
+            fahrzeuge = new List<Fahrzeug>();
         }
-
-        #region
+        
         public List<Fahrzeug> Fahrzeuge
         {
             get { return fahrzeuge; }
         }
-        #endregion
 
         public void FahrzeugHinzufügen(Fahrzeug fahrzeug)
         {

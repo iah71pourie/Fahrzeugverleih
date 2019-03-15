@@ -329,6 +329,7 @@
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.fahrzeugSpeichernButton);
             this.Name = "FahrzeugBearbeiten";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FahrzeugBearbeiten";
             this.Load += new System.EventHandler(this.FahrzeugBearbeiten_Load);
             this.tableLayoutPanel.ResumeLayout(false);

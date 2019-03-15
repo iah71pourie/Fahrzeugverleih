@@ -9,14 +9,10 @@ namespace Fahrzeugverleih
     class ParkhausVerwaltung
     {
         private List<Parkhaus> parkhäuser;
-
-        DateiVerwaltung dateiVerwaltung;
-
+        
         public ParkhausVerwaltung()
         {
-            dateiVerwaltung = new DateiVerwaltung();
-
-            parkhäuser = dateiVerwaltung.ParkhäuserAuslesen();
+            parkhäuser = new List<Parkhaus>();
         }
 
         public bool ParkhausZuweisung(Fahrzeug fahrzeug)
@@ -66,7 +62,6 @@ namespace Fahrzeugverleih
 
             return false;
         }
-
         public Parkplatz ParkplatzSuche(Fahrzeug fahrzeug)
         {
             foreach (Parkhaus parkhaus in parkhäuser)
@@ -79,7 +74,6 @@ namespace Fahrzeugverleih
             }
             return null;
         }
-
         public void NeuesParkhausBauen(int PLZ, string Ort, string Straße, int PKWParkplätze, int LKWParkplätze, int MotoradParkplätze)
         {
             Parkhaus parkhaus = new Parkhaus();

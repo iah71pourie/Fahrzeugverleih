@@ -10,13 +10,12 @@ using System.Windows.Forms;
 
 namespace Fahrzeugverleih
 {
-    // DATA GRID VIEW
     public partial class HauptmenüForm : Form
     {
         FahrzeugVerwaltung fahrzeugVerwaltung;
         ParkhausVerwaltung parkhausVerwaltung;
-
         DateiVerwaltung dateiVerwaltung;
+
         CurrencyManager currencyManager;
 
         public HauptmenüForm()
@@ -25,17 +24,16 @@ namespace Fahrzeugverleih
 
             fahrzeugVerwaltung = new FahrzeugVerwaltung();
             parkhausVerwaltung = new ParkhausVerwaltung();
-
             dateiVerwaltung = new DateiVerwaltung();
-            dataGridView1.DataSource = fahrzeugVerwaltung.Fahrzeuge;
-            currencyManager = (CurrencyManager)dataGridView1.BindingContext[fahrzeugVerwaltung.Fahrzeuge];
 
+            fahrzeugeDataGridView.DataSource = fahrzeugVerwaltung.Fahrzeuge;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             fahrzeugVerwaltung.Fahrzeuge.AddRange(dateiVerwaltung.FahrzeugeAuslesen());
-
+                       
+            currencyManager = (CurrencyManager)fahrzeugeDataGridView.BindingContext[fahrzeugVerwaltung.Fahrzeuge];
             currencyManager.Refresh();
         }
         private void HauptmenüForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -66,7 +64,7 @@ namespace Fahrzeugverleih
                         if (!kennzeichenVorhanden)
                         {
                             fahrzeugVerwaltung.FahrzeugHinzufügen(fahrzeugErstellenForm.Fahrzeug);
-                            fahrzeugeListBox.Items.Add(fahrzeugErstellenForm.Fahrzeug.Kennzeichen);
+                            currencyManager.Refresh();
                         }
                         else
                         {
@@ -77,7 +75,7 @@ namespace Fahrzeugverleih
                 while (kennzeichenVorhanden);
             }
         }
-        private void fahrzeugeListBox_DoubleClick(object sender, EventArgs e)
+        private void fahrzeugeDataGridView_DoubleClick(object sender, EventArgs e)
         {
             int ausgewähltesFahrzeug = 0;
 
@@ -85,7 +83,7 @@ namespace Fahrzeugverleih
             {
                 for (int i = 0; i < fahrzeugVerwaltung.Fahrzeuge.Count; i++)
                 {
-                    if (fahrzeugVerwaltung.Fahrzeuge[i].Kennzeichen == fahrzeugeListBox.SelectedItem.ToString())
+                    if (fahrzeugVerwaltung.Fahrzeuge[i] == (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug))
                     {
                         if (fahrzeugVerwaltung.Fahrzeuge[i] is PKW)
                             fahrzeugBearbeitenForm.Fahrzeug = (fahrzeugVerwaltung.Fahrzeuge[i] as PKW);
@@ -104,23 +102,25 @@ namespace Fahrzeugverleih
 
                 fahrzeugVerwaltung.Fahrzeuge[ausgewähltesFahrzeug] = fahrzeugBearbeitenForm.Fahrzeug;
                 sucheTextBox.Text = "";
-                fahrzeugeListBoxUpdaten(fahrzeugVerwaltung.Fahrzeuge);
+                currencyManager.Refresh();
             }
         }
         private void sucheTextBox_TextChanged(object sender, EventArgs e)
         {
-            fahrzeugeListBoxUpdaten(fahrzeugVerwaltung.FahrzeugSuchen(sucheTextBox.Text));
+
         }
         private void fahrzeugLöschenButton_Click(object sender, EventArgs e)
         {
-            if (fahrzeugeListBox.SelectedIndex >= 0)
+            if (fahrzeugeDataGridView.CurrentRow.Index >= 0 && MessageBox.Show("Sind Sie sich sicher, dass Sie das Fahrzeug löschen wollen?", "Fahrzeug löschen?", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
             {
-                for (int i = 0; i < fahrzeugVerwaltung.Fahrzeuge.Count; i++)
+                for (int i = 0; i <= fahrzeugVerwaltung.Fahrzeuge.Count; i++)
                 {
-                    if (fahrzeugVerwaltung.Fahrzeuge[i].Kennzeichen == fahrzeugeListBox.SelectedItem.ToString())
+                    if (fahrzeugVerwaltung.Fahrzeuge[i] == (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug))
                     {
                         fahrzeugVerwaltung.Fahrzeuge.Remove(fahrzeugVerwaltung.Fahrzeuge[i]);
-                        fahrzeugeListBoxUpdaten(fahrzeugVerwaltung.Fahrzeuge);
+                        currencyManager.Refresh();
+
+                        i = fahrzeugVerwaltung.Fahrzeuge.Count() + 1;
                     }
                 }
             }
