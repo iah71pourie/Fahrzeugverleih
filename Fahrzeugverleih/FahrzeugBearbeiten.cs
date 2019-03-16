@@ -94,7 +94,7 @@ namespace Fahrzeugverleih
             herstellerComboBox.Text = fahrzeug.Hersteller;
             modellTextBox.Text = fahrzeug.Modell;
             anschaffungspreisTextBox.Text = fahrzeug.Anschaffungspreis.ToString();
-            zulassungsjahrMaskedTextBox.Text = fahrzeug.Zulassungsjahr.ToString();
+            zulassungsdatumMaskedTextBox.Text = fahrzeug.Zulassungsdatum.ToString();
         }
         private void fahrzeugArtComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -166,7 +166,7 @@ namespace Fahrzeugverleih
         {
             try
             {
-                if (kennzeichenMaskedTextBox.MaskCompleted && zulassungsjahrMaskedTextBox.MaskCompleted &&
+                if (kennzeichenMaskedTextBox.MaskCompleted && zulassungsdatumMaskedTextBox.MaskCompleted &&
                     herstellerComboBox.Text.Length > 0 && modellTextBox.Text.Length > 0)
                 {
                     switch (fahrzeugArtComboBox.Text)
@@ -192,11 +192,11 @@ namespace Fahrzeugverleih
                             (fahrzeug as Motorrad).Hubraum = Convert.ToInt32(hubraumTextBox.Text);
                             break;
                     }
-                    fahrzeug.Kennzeichen = kennzeichenMaskedTextBox.Text;
+                    fahrzeug.Kennzeichen = kennzeichenMaskedTextBox.Text.ToUpper();
                     fahrzeug.Hersteller = herstellerComboBox.Text;
                     fahrzeug.Modell = modellTextBox.Text;
                     fahrzeug.Anschaffungspreis = Convert.ToInt32(anschaffungspreisTextBox.Text);
-                    fahrzeug.Zulassungsjahr = Convert.ToDateTime(zulassungsjahrMaskedTextBox.Text);
+                    fahrzeug.Zulassungsdatum = Convert.ToDateTime(zulassungsdatumMaskedTextBox.Text);
 
                     this.Close();
                 }

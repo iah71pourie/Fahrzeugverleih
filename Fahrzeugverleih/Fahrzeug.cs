@@ -8,22 +8,27 @@ namespace Fahrzeugverleih
 {
     public abstract class Fahrzeug
     {
+        protected string kennzeichen;
         protected string hersteller;
         protected string modell;
-        protected string kennzeichen;
-        protected DateTime zulassungsjahr;
+        protected DateTime zulassungsdatum;
         protected int anschaffungspreis;
 
         public Fahrzeug()
         {
+            kennzeichen = "";
             hersteller = "";
             modell = "";
-            kennzeichen = "";
-            zulassungsjahr = new DateTime();
+            zulassungsdatum = new DateTime();
             anschaffungspreis = 0;
         }
 
         #region Eigenschaften
+        public string Kennzeichen
+        {
+            get { return kennzeichen; }
+            set { kennzeichen = value; }
+        }
         public string Hersteller
         {
             get { return hersteller; }
@@ -34,15 +39,10 @@ namespace Fahrzeugverleih
             get { return modell; }
             set { modell = value; }
         }
-        public string Kennzeichen
+        public DateTime Zulassungsdatum
         {
-            get { return kennzeichen; }
-            set { kennzeichen = value; }
-        }
-        public DateTime Zulassungsjahr
-        {
-            get { return zulassungsjahr; }
-            set { zulassungsjahr = value; }
+            get { return zulassungsdatum; }
+            set { zulassungsdatum = value; }
         }
         public int Anschaffungspreis
         {

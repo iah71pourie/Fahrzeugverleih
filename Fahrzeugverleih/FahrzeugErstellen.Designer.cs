@@ -40,8 +40,8 @@
             this.modellTextBox = new System.Windows.Forms.TextBox();
             this.anschaffungspreisLabel = new System.Windows.Forms.Label();
             this.anschaffungspreisTextBox = new System.Windows.Forms.TextBox();
-            this.zulassungsjahrLabel = new System.Windows.Forms.Label();
-            this.zulassungsjahrMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.zulassungsdatumLabel = new System.Windows.Forms.Label();
+            this.zulassungsdatumMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.hubraumLabel = new System.Windows.Forms.Label();
             this.hubraumTextBox = new System.Windows.Forms.TextBox();
             this.leistungLabel = new System.Windows.Forms.Label();
@@ -105,8 +105,8 @@
             this.tableLayoutPanel.Controls.Add(this.modellTextBox, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.anschaffungspreisLabel, 0, 4);
             this.tableLayoutPanel.Controls.Add(this.anschaffungspreisTextBox, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.zulassungsjahrLabel, 0, 5);
-            this.tableLayoutPanel.Controls.Add(this.zulassungsjahrMaskedTextBox, 1, 5);
+            this.tableLayoutPanel.Controls.Add(this.zulassungsdatumLabel, 0, 5);
+            this.tableLayoutPanel.Controls.Add(this.zulassungsdatumMaskedTextBox, 1, 5);
             this.tableLayoutPanel.Location = new System.Drawing.Point(13, 13);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 9;
@@ -192,24 +192,24 @@
             this.anschaffungspreisTextBox.Size = new System.Drawing.Size(186, 20);
             this.anschaffungspreisTextBox.TabIndex = 9;
             // 
-            // zulassungsjahrLabel
+            // zulassungsdatumLabel
             // 
-            this.zulassungsjahrLabel.AutoSize = true;
-            this.zulassungsjahrLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zulassungsjahrLabel.Location = new System.Drawing.Point(3, 134);
-            this.zulassungsjahrLabel.Name = "zulassungsjahrLabel";
-            this.zulassungsjahrLabel.Size = new System.Drawing.Size(112, 18);
-            this.zulassungsjahrLabel.TabIndex = 10;
-            this.zulassungsjahrLabel.Text = "Zulassungsjahr:";
+            this.zulassungsdatumLabel.AutoSize = true;
+            this.zulassungsdatumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.zulassungsdatumLabel.Location = new System.Drawing.Point(3, 134);
+            this.zulassungsdatumLabel.Name = "zulassungsdatumLabel";
+            this.zulassungsdatumLabel.Size = new System.Drawing.Size(129, 18);
+            this.zulassungsdatumLabel.TabIndex = 10;
+            this.zulassungsdatumLabel.Text = "Zulassungsdatum:";
             // 
-            // zulassungsjahrMaskedTextBox
+            // zulassungsdatumMaskedTextBox
             // 
-            this.zulassungsjahrMaskedTextBox.Location = new System.Drawing.Point(195, 137);
-            this.zulassungsjahrMaskedTextBox.Mask = "00/00/0000";
-            this.zulassungsjahrMaskedTextBox.Name = "zulassungsjahrMaskedTextBox";
-            this.zulassungsjahrMaskedTextBox.Size = new System.Drawing.Size(186, 20);
-            this.zulassungsjahrMaskedTextBox.TabIndex = 11;
-            this.zulassungsjahrMaskedTextBox.ValidatingType = typeof(System.DateTime);
+            this.zulassungsdatumMaskedTextBox.Location = new System.Drawing.Point(195, 137);
+            this.zulassungsdatumMaskedTextBox.Mask = "00/00/0000";
+            this.zulassungsdatumMaskedTextBox.Name = "zulassungsdatumMaskedTextBox";
+            this.zulassungsdatumMaskedTextBox.Size = new System.Drawing.Size(186, 20);
+            this.zulassungsdatumMaskedTextBox.TabIndex = 11;
+            this.zulassungsdatumMaskedTextBox.ValidatingType = typeof(System.DateTime);
             // 
             // hubraumLabel
             // 
@@ -331,7 +331,7 @@
             this.Controls.Add(this.fahrzeugSpeichernButton);
             this.Name = "FahrzeugErstellen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Fahrzeug";
+            this.Text = "Fahrzeug erstellen";
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -353,8 +353,8 @@
         private System.Windows.Forms.TextBox modellTextBox;
         private System.Windows.Forms.Label anschaffungspreisLabel;
         private System.Windows.Forms.TextBox anschaffungspreisTextBox;
-        private System.Windows.Forms.Label zulassungsjahrLabel;
-        private System.Windows.Forms.MaskedTextBox zulassungsjahrMaskedTextBox;
+        private System.Windows.Forms.Label zulassungsdatumLabel;
+        private System.Windows.Forms.MaskedTextBox zulassungsdatumMaskedTextBox;
         private System.Windows.Forms.Label hubraumLabel;
         private System.Windows.Forms.TextBox hubraumTextBox;
         private System.Windows.Forms.Label leistungLabel;

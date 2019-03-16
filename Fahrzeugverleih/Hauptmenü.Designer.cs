@@ -200,7 +200,7 @@
             this.parkhäuserTabPage.Location = new System.Drawing.Point(4, 22);
             this.parkhäuserTabPage.Name = "parkhäuserTabPage";
             this.parkhäuserTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.parkhäuserTabPage.Size = new System.Drawing.Size(1098, 442);
+            this.parkhäuserTabPage.Size = new System.Drawing.Size(1096, 448);
             this.parkhäuserTabPage.TabIndex = 1;
             this.parkhäuserTabPage.Text = "Parkhäuser";
             this.parkhäuserTabPage.UseVisualStyleBackColor = true;
@@ -214,7 +214,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "HauptmenüForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Auto Verleih Hauptmenü";
+            this.Text = "Fahrzeugverleih Hauptmenü";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HauptmenüForm_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.parkhäuserGroupBox.ResumeLayout(false);

@@ -20,7 +20,7 @@ namespace Fahrzeugverleih
                 foreach (Fahrzeug fahrzeug in fahrzeuge)
                 {
                     writer.Write(fahrzeug.Hersteller + ";" + fahrzeug.Modell + ";" +
-                        fahrzeug.Kennzeichen + ";" + fahrzeug.Zulassungsjahr.ToString() + ";" + fahrzeug.Anschaffungspreis.ToString() + ";");
+                        fahrzeug.Kennzeichen + ";" + fahrzeug.Zulassungsdatum.ToString() + ";" + fahrzeug.Anschaffungspreis.ToString() + ";");
 
                     if (fahrzeug is PKW)
                     {
@@ -63,7 +63,7 @@ namespace Fahrzeugverleih
                         writer.Write(parkplatz.ParkplatzTyp.ToString() + ";" + parkplatz.Stellplatznummer.ToString() + ";");
 
                         writer.Write(parkplatz.Fahrzeug.Hersteller.ToString() + ";" + parkplatz.Fahrzeug.Modell.ToString() + ";" +
-                            parkplatz.Fahrzeug.Kennzeichen.ToString() + ";" + parkplatz.Fahrzeug.Zulassungsjahr.ToString() + ";" +
+                            parkplatz.Fahrzeug.Kennzeichen.ToString() + ";" + parkplatz.Fahrzeug.Zulassungsdatum.ToString() + ";" +
                             parkplatz.Fahrzeug.Anschaffungspreis.ToString() + ";");
 
                         writer.WriteLine();
@@ -91,7 +91,7 @@ namespace Fahrzeugverleih
                         fahrzeug.Hersteller = ZeilenInhalt[0];
                         fahrzeug.Modell = ZeilenInhalt[1];
                         fahrzeug.Kennzeichen = ZeilenInhalt[2];
-                        fahrzeug.Zulassungsjahr = Convert.ToDateTime(ZeilenInhalt[3]);
+                        fahrzeug.Zulassungsdatum = Convert.ToDateTime(ZeilenInhalt[3]);
                         fahrzeug.Anschaffungspreis = Convert.ToInt32(ZeilenInhalt[4]);
                         (fahrzeug as PKW).Hubraum = Convert.ToInt32(ZeilenInhalt[5]);
                         (fahrzeug as PKW).Leistung = Convert.ToInt32(ZeilenInhalt[6]);
@@ -105,7 +105,7 @@ namespace Fahrzeugverleih
                         fahrzeug.Hersteller = ZeilenInhalt[0];
                         fahrzeug.Modell = ZeilenInhalt[1];
                         fahrzeug.Kennzeichen = ZeilenInhalt[2];
-                        fahrzeug.Zulassungsjahr = Convert.ToDateTime(ZeilenInhalt[3]);
+                        fahrzeug.Zulassungsdatum = Convert.ToDateTime(ZeilenInhalt[3]);
                         fahrzeug.Anschaffungspreis = Convert.ToInt32(ZeilenInhalt[4]);
                         (fahrzeug as LKW).Zuladung = Convert.ToInt32(ZeilenInhalt[5]);
                         (fahrzeug as LKW).AchsenAnzahl = Convert.ToInt32(ZeilenInhalt[6]);
@@ -118,7 +118,7 @@ namespace Fahrzeugverleih
                         fahrzeug.Hersteller = ZeilenInhalt[0];
                         fahrzeug.Modell = ZeilenInhalt[1];
                         fahrzeug.Kennzeichen = ZeilenInhalt[2];
-                        fahrzeug.Zulassungsjahr = Convert.ToDateTime(ZeilenInhalt[3]);
+                        fahrzeug.Zulassungsdatum = Convert.ToDateTime(ZeilenInhalt[3]);
                         fahrzeug.Anschaffungspreis = Convert.ToInt32(ZeilenInhalt[4]);
                         (fahrzeug as Motorrad).Hubraum = Convert.ToInt32(ZeilenInhalt[5]);
 
@@ -194,7 +194,7 @@ namespace Fahrzeugverleih
                             parkhaus.Parkplätze[i].Fahrzeug.Hersteller = ParkhausZeilenInhalt[0];
                             parkhaus.Parkplätze[i].Fahrzeug.Modell = ParkhausZeilenInhalt[1];
                             parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen = ParkhausZeilenInhalt[2];
-                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsjahr = Convert.ToDateTime(ParkhausZeilenInhalt[3]);
+                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsdatum = Convert.ToDateTime(ParkhausZeilenInhalt[3]);
                             parkhaus.Parkplätze[i].Fahrzeug.Anschaffungspreis = Convert.ToInt32(ParkhausZeilenInhalt[4]);
                             (parkhaus.Parkplätze[i].Fahrzeug as PKW).Hubraum = Convert.ToInt32(ParkhausZeilenInhalt[5]);
                             (parkhaus.Parkplätze[i].Fahrzeug as PKW).Leistung = Convert.ToInt32(ParkhausZeilenInhalt[6]);
@@ -208,7 +208,7 @@ namespace Fahrzeugverleih
                             parkhaus.Parkplätze[i].Fahrzeug.Hersteller = ParkhausZeilenInhalt[0];
                             parkhaus.Parkplätze[i].Fahrzeug.Modell = ParkhausZeilenInhalt[1];
                             parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen = ParkhausZeilenInhalt[2];
-                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsjahr = Convert.ToDateTime(ParkhausZeilenInhalt[3]);
+                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsdatum = Convert.ToDateTime(ParkhausZeilenInhalt[3]);
                             parkhaus.Parkplätze[i].Fahrzeug.Anschaffungspreis = Convert.ToInt32(ParkhausZeilenInhalt[4]);
                             (parkhaus.Parkplätze[i].Fahrzeug as LKW).Zuladung = Convert.ToInt32(ParkhausZeilenInhalt[5]);
                             (parkhaus.Parkplätze[i].Fahrzeug as LKW).AchsenAnzahl = Convert.ToInt32(ParkhausZeilenInhalt[6]);
@@ -221,7 +221,7 @@ namespace Fahrzeugverleih
                             parkhaus.Parkplätze[i].Fahrzeug.Hersteller = ParkhausZeilenInhalt[0];
                             parkhaus.Parkplätze[i].Fahrzeug.Modell = ParkhausZeilenInhalt[1];
                             parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen = ParkhausZeilenInhalt[2];
-                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsjahr = Convert.ToDateTime(ParkhausZeilenInhalt[3]);
+                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsdatum = Convert.ToDateTime(ParkhausZeilenInhalt[3]);
                             parkhaus.Parkplätze[i].Fahrzeug.Anschaffungspreis = Convert.ToInt32(ParkhausZeilenInhalt[4]);
                             (parkhaus.Parkplätze[i].Fahrzeug as Motorrad).Hubraum = Convert.ToInt32(ParkhausZeilenInhalt[5]);
 

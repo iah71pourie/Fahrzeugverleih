@@ -41,6 +41,7 @@ namespace Fahrzeugverleih
             dateiVerwaltung.FahrzeugeSpeichern(fahrzeugVerwaltung.Fahrzeuge);
         }
 
+        #region Fahrzeuge
         private void fahrzeugErstellenButton_Click(object sender, EventArgs e)
         {
             using (FahrzeugErstellen fahrzeugErstellenForm = new FahrzeugErstellen())
@@ -107,7 +108,23 @@ namespace Fahrzeugverleih
         }
         private void sucheTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (sucheTextBox.Text.Length > 0 && sucheTextBox.Text.Last() == ' ' && sucheTextBox.Text.Count(c => c == '-') < 1)
+            {
+                sucheTextBox.Text = sucheTextBox.Text.Remove(sucheTextBox.Text.Length - 1, 1) + '-';
+                sucheTextBox.SelectionStart = sucheTextBox.Text.Length;
+            }
+                
+            currencyManager.SuspendBinding();
 
+            foreach(DataGridViewRow row in fahrzeugeDataGridView.Rows)
+            {
+                if (!row.Cells[0].Value.ToString().Contains(sucheTextBox.Text.ToUpper()))
+                    row.Visible = false;
+                else
+                    row.Visible = true;
+            }
+
+            currencyManager.ResumeBinding();
         }
         private void fahrzeugLöschenButton_Click(object sender, EventArgs e)
         {
@@ -125,5 +142,6 @@ namespace Fahrzeugverleih
                 }
             }
         }
+        #endregion
     }
 }
