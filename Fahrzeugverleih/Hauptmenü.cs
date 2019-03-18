@@ -26,15 +26,16 @@ namespace Fahrzeugverleih
             parkhausVerwaltung = new ParkhausVerwaltung();
             dateiVerwaltung = new DateiVerwaltung();
 
-            fahrzeugeDataGridView.DataSource = fahrzeugVerwaltung.Fahrzeuge;
+            fahrzeugeDataGridView.DataSource = fahrzeugVerwaltung.Fahrzeuge;            
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void HauptmenüForm_Load(object sender, EventArgs e)
         {
             fahrzeugVerwaltung.Fahrzeuge.AddRange(dateiVerwaltung.FahrzeugeAuslesen());
-                       
+
             currencyManager = (CurrencyManager)fahrzeugeDataGridView.BindingContext[fahrzeugVerwaltung.Fahrzeuge];
             currencyManager.Refresh();
+            gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
         }
         private void HauptmenüForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -66,6 +67,7 @@ namespace Fahrzeugverleih
                         {
                             fahrzeugVerwaltung.FahrzeugHinzufügen(fahrzeugErstellenForm.Fahrzeug);
                             currencyManager.Refresh();
+                            gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
                         }
                         else
                         {
@@ -104,6 +106,7 @@ namespace Fahrzeugverleih
                 fahrzeugVerwaltung.Fahrzeuge[ausgewähltesFahrzeug] = fahrzeugBearbeitenForm.Fahrzeug;
                 sucheTextBox.Text = "";
                 currencyManager.Refresh();
+                gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
             }
         }
         private void sucheTextBox_TextChanged(object sender, EventArgs e)
@@ -113,15 +116,15 @@ namespace Fahrzeugverleih
                 sucheTextBox.Text = sucheTextBox.Text.Remove(sucheTextBox.Text.Length - 1, 1) + '-';
                 sucheTextBox.SelectionStart = sucheTextBox.Text.Length;
             }
-                
+
             currencyManager.SuspendBinding();
 
-            foreach(DataGridViewRow row in fahrzeugeDataGridView.Rows)
+            foreach (DataGridViewRow Zeile in fahrzeugeDataGridView.Rows)
             {
-                if (!row.Cells[0].Value.ToString().Contains(sucheTextBox.Text.ToUpper()))
-                    row.Visible = false;
+                if (!Zeile.Cells[0].Value.ToString().Contains(sucheTextBox.Text.ToUpper()))
+                    Zeile.Visible = false;
                 else
-                    row.Visible = true;
+                    Zeile.Visible = true;
             }
 
             currencyManager.ResumeBinding();
@@ -136,6 +139,7 @@ namespace Fahrzeugverleih
                     {
                         fahrzeugVerwaltung.Fahrzeuge.Remove(fahrzeugVerwaltung.Fahrzeuge[i]);
                         currencyManager.Refresh();
+                        gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
 
                         i = fahrzeugVerwaltung.Fahrzeuge.Count() + 1;
                     }

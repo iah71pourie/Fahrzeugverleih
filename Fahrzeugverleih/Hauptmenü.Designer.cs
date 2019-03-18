@@ -41,6 +41,8 @@
             this.fahrzeugeTabPage = new System.Windows.Forms.TabPage();
             this.fahrzeugeDataGridView = new System.Windows.Forms.DataGridView();
             this.parkhäuserTabPage = new System.Windows.Forms.TabPage();
+            this.gesammteSteuerschuldLabel = new System.Windows.Forms.Label();
+            this.gesammteSteuerschuldTextBox = new System.Windows.Forms.TextBox();
             this.parkhäuserGroupBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.fahrzeugeTabPage.SuspendLayout();
@@ -152,6 +154,8 @@
             // 
             // fahrzeugeTabPage
             // 
+            this.fahrzeugeTabPage.Controls.Add(this.gesammteSteuerschuldLabel);
+            this.fahrzeugeTabPage.Controls.Add(this.gesammteSteuerschuldTextBox);
             this.fahrzeugeTabPage.Controls.Add(this.fahrzeugeDataGridView);
             this.fahrzeugeTabPage.Controls.Add(this.fahrzeugErstellenButton);
             this.fahrzeugeTabPage.Controls.Add(this.sucheLabel);
@@ -205,6 +209,28 @@
             this.parkhäuserTabPage.Text = "Parkhäuser";
             this.parkhäuserTabPage.UseVisualStyleBackColor = true;
             // 
+            // gesammteSteuerschuldLabel
+            // 
+            this.gesammteSteuerschuldLabel.AutoSize = true;
+            this.gesammteSteuerschuldLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gesammteSteuerschuldLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gesammteSteuerschuldLabel.Location = new System.Drawing.Point(840, 171);
+            this.gesammteSteuerschuldLabel.Name = "gesammteSteuerschuldLabel";
+            this.gesammteSteuerschuldLabel.Size = new System.Drawing.Size(164, 18);
+            this.gesammteSteuerschuldLabel.TabIndex = 6;
+            this.gesammteSteuerschuldLabel.Text = "Steuerschuld gesammt:";
+            // 
+            // gesammteSteuerschuldTextBox
+            // 
+            this.gesammteSteuerschuldTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gesammteSteuerschuldTextBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.gesammteSteuerschuldTextBox.Location = new System.Drawing.Point(843, 192);
+            this.gesammteSteuerschuldTextBox.Name = "gesammteSteuerschuldTextBox";
+            this.gesammteSteuerschuldTextBox.ReadOnly = true;
+            this.gesammteSteuerschuldTextBox.Size = new System.Drawing.Size(161, 26);
+            this.gesammteSteuerschuldTextBox.TabIndex = 5;
+            this.gesammteSteuerschuldTextBox.TabStop = false;
+            // 
             // HauptmenüForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,7 +242,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fahrzeugverleih Hauptmenü";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HauptmenüForm_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.HauptmenüForm_Load);
             this.parkhäuserGroupBox.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.fahrzeugeTabPage.ResumeLayout(false);
@@ -241,6 +267,8 @@
         private System.Windows.Forms.TabPage fahrzeugeTabPage;
         private System.Windows.Forms.DataGridView fahrzeugeDataGridView;
         private System.Windows.Forms.TabPage parkhäuserTabPage;
+        private System.Windows.Forms.Label gesammteSteuerschuldLabel;
+        private System.Windows.Forms.TextBox gesammteSteuerschuldTextBox;
     }
 }
 
