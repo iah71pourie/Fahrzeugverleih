@@ -1,6 +1,6 @@
 ﻿namespace Fahrzeugverleih
 {
-    partial class FahrzeugErstellen
+    partial class FahrzeugForm
     {
         /// <summary>
         /// Required designer variable.
@@ -312,7 +312,7 @@
             this.zuladungTextBox.TabIndex = 16;
             this.zuladungTextBox.Visible = false;
             // 
-            // FahrzeugErstellen
+            // FahrzeugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -329,9 +329,10 @@
             this.Controls.Add(this.hubraumLabel);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.fahrzeugSpeichernButton);
-            this.Name = "FahrzeugErstellen";
+            this.Name = "FahrzeugForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fahrzeug erstellen";
+            this.Load += new System.EventHandler(this.FahrzeugErstellen_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);

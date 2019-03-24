@@ -7,17 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Fahrzeugverleih;
 
 namespace Fahrzeugverleih
 {
-    public partial class FahrzeugBearbeiten : Form
+    public partial class FahrzeugForm : Form
     {
         private Fahrzeug fahrzeug;
 
-        public FahrzeugBearbeiten()
+        public FahrzeugForm()
         {
             InitializeComponent();
-
+            
             herstellerComboBox.Items.AddRange(new string[] {
             "Audi",
             "Abarth",
@@ -60,54 +61,61 @@ namespace Fahrzeugverleih
             "Volkswagen",
             "Volvo" });
         }
-        
+
+        #region Eigenschaften
         public Fahrzeug Fahrzeug
         {
             get { return fahrzeug; }
             set { fahrzeug = value; }
         }
+        #endregion
 
-        private void FahrzeugBearbeiten_Load(object sender, EventArgs e)
+        private void FahrzeugErstellen_Load(object sender, EventArgs e)
         {
-            if (fahrzeug is PKW)
+            if (fahrzeug != null)
             {
-                fahrzeugArtComboBox.SelectedIndex = 0;
-                this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
-                hubraumTextBox.Text = (fahrzeug as PKW).Hubraum.ToString();
-                leistungTextBox.Text = (fahrzeug as PKW).Leistung.ToString();
-                schadstoffklasseComboBox.Text = (fahrzeug as PKW).Schadstoffklasse.ToString();
-            }
-            else if (fahrzeug is LKW)
-            {
-                fahrzeugArtComboBox.SelectedIndex = 1;
-                this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
-                achsenanzahlTextBox.Text = (fahrzeug as LKW).AchsenAnzahl.ToString();
-                zuladungTextBox.Text = (fahrzeug as LKW).Zuladung.ToString();
-            }
-            else if (fahrzeug is Motorrad)
-            {
-                fahrzeugArtComboBox.SelectedIndex = 2;
-                this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
-                hubraumTextBox.Text = (fahrzeug as Motorrad).Hubraum.ToString();
-            }
-            herstellerComboBox.Text = fahrzeug.Hersteller;
-            modellTextBox.Text = fahrzeug.Modell;
-            anschaffungspreisTextBox.Text = fahrzeug.Anschaffungspreis.ToString();
-            zulassungsdatumMaskedTextBox.Text = fahrzeug.Zulassungsdatum.ToString();
+                if (fahrzeug is PKW)
+                {
+                    fahrzeugArtComboBox.SelectedIndex = 0;
+                    this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
+                    hubraumTextBox.Text = (fahrzeug as PKW).Hubraum.ToString();
+                    leistungTextBox.Text = (fahrzeug as PKW).Leistung.ToString();
+                    schadstoffklasseComboBox.Text = (fahrzeug as PKW).Schadstoffklasse.ToString();
+                }
+                else if (fahrzeug is LKW)
+                {
+                    fahrzeugArtComboBox.SelectedIndex = 1;
+                    this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
+                    achsenanzahlTextBox.Text = (fahrzeug as LKW).AchsenAnzahl.ToString();
+                    zuladungTextBox.Text = (fahrzeug as LKW).Zuladung.ToString();
+                }
+                else if (fahrzeug is Motorrad)
+                {
+                    fahrzeugArtComboBox.SelectedIndex = 2;
+                    this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
+                    hubraumTextBox.Text = (fahrzeug as Motorrad).Hubraum.ToString();
+                }
+                herstellerComboBox.Text = fahrzeug.Hersteller;
+                modellTextBox.Text = fahrzeug.Modell;
+                anschaffungspreisTextBox.Text = fahrzeug.Anschaffungspreis.ToString();
+                zulassungsdatumMaskedTextBox.Text = fahrzeug.Zulassungsdatum.ToString();
 
-            string kennzeichen = "";
+                string kennzeichen = "";
 
-            foreach (char Buchstabe in fahrzeug.Kennzeichen)
-            {
-                if (Buchstabe != '-' || (Buchstabe == '-' && kennzeichen.Length == 3))
-                    kennzeichen += Buchstabe;
-                else if (Buchstabe == '-' && kennzeichen.Length == 1)
-                    kennzeichen += "  " + Buchstabe;
-                else if (Buchstabe == '-' && kennzeichen.Length == 2)
-                    kennzeichen += " " + Buchstabe;
+                foreach (char Buchstabe in fahrzeug.Kennzeichen)
+                {
+                    if (kennzeichen.Length == 5 && Int32.TryParse(Buchstabe.ToString(), out int result))
+                        kennzeichen += " " + Buchstabe;
+                    else if (Buchstabe != '-' || (Buchstabe == '-' && kennzeichen.Length == 3))
+                        kennzeichen += Buchstabe;
+                    else if (Buchstabe == '-' && kennzeichen.Length == 1)
+                        kennzeichen += "  " + Buchstabe;
+                    else if (Buchstabe == '-' && kennzeichen.Length == 2)
+                        kennzeichen += " " + Buchstabe;
+                }
+
+                kennzeichenMaskedTextBox.Text = kennzeichen;
             }
-
-            kennzeichenMaskedTextBox.Text = kennzeichen;
         }
         private void fahrzeugArtComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -210,7 +218,7 @@ namespace Fahrzeugverleih
                     fahrzeug.Modell = modellTextBox.Text;
                     fahrzeug.Anschaffungspreis = Convert.ToInt32(anschaffungspreisTextBox.Text);
                     fahrzeug.Zulassungsdatum = Convert.ToDateTime(zulassungsdatumMaskedTextBox.Text);
-
+                    
                     this.Close();
                 }
                 else

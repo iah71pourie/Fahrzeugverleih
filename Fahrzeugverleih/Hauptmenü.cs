@@ -51,7 +51,7 @@ namespace Fahrzeugverleih
         #region Fahrzeuge
         private void fahrzeugErstellenButton_Click(object sender, EventArgs e)
         {
-            using (FahrzeugErstellen fahrzeugErstellenForm = new FahrzeugErstellen())
+            using (FahrzeugForm fahrzeugErstellenForm = new FahrzeugForm())
             {
                 bool kennzeichenVorhanden;
 
@@ -86,9 +86,7 @@ namespace Fahrzeugverleih
         }
         private void fahrzeugeDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            //int ausgewähltesFahrzeug = 0;
-
-            using (FahrzeugBearbeiten fahrzeugBearbeitenForm = new FahrzeugBearbeiten())
+            using (FahrzeugForm fahrzeugBearbeitenForm = new FahrzeugForm())
             {
                 Fahrzeug fahrzeug = (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug);
                 fahrzeugBearbeitenForm.Fahrzeug = fahrzeug;
