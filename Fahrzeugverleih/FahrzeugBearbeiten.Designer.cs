@@ -224,7 +224,7 @@
             // kennzeichenMaskedTextBox
             // 
             this.kennzeichenMaskedTextBox.Location = new System.Drawing.Point(195, 30);
-            this.kennzeichenMaskedTextBox.Mask = "L-L? 0099";
+            this.kennzeichenMaskedTextBox.Mask = "L??-L? 0099";
             this.kennzeichenMaskedTextBox.Name = "kennzeichenMaskedTextBox";
             this.kennzeichenMaskedTextBox.Size = new System.Drawing.Size(186, 20);
             this.kennzeichenMaskedTextBox.TabIndex = 3;

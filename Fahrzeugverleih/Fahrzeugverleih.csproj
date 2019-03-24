@@ -70,6 +70,12 @@
     <Compile Include="LKW.cs" />
     <Compile Include="Motorrad.cs" />
     <Compile Include="Parkhaus.cs" />
+    <Compile Include="ParkhausErstellen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParkhausErstellen.Designer.cs">
+      <DependentUpon>ParkhausErstellen.cs</DependentUpon>
+    </Compile>
     <Compile Include="ParkhausVerwaltung.cs" />
     <Compile Include="Parkplatz.cs" />
     <Compile Include="PKW.cs" />
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Hauptmenü.resx">
       <DependentUpon>Hauptmenü.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParkhausErstellen.resx">
+      <DependentUpon>ParkhausErstellen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

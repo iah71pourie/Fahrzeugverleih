@@ -165,12 +165,12 @@ namespace Fahrzeugverleih
                             (fahrzeug as Motorrad).Hubraum = Convert.ToInt32(hubraumTextBox.Text);
                             break;
                     }
-                    fahrzeug.Kennzeichen = kennzeichenMaskedTextBox.Text.ToUpper();
+                    fahrzeug.Kennzeichen = kennzeichenMaskedTextBox.Text.ToUpper().Replace(" ", "");
                     fahrzeug.Hersteller = herstellerComboBox.Text;
                     fahrzeug.Modell = modellTextBox.Text;
                     fahrzeug.Anschaffungspreis = Convert.ToInt32(anschaffungspreisTextBox.Text);
                     fahrzeug.Zulassungsdatum = Convert.ToDateTime(zulassungsdatumMaskedTextBox.Text);
-
+                    
                     this.Close();
                 }
                 else

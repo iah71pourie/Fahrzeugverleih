@@ -90,11 +90,24 @@ namespace Fahrzeugverleih
                 this.fahrzeugArtComboBox_SelectedIndexChanged(sender, e);
                 hubraumTextBox.Text = (fahrzeug as Motorrad).Hubraum.ToString();
             }
-            kennzeichenMaskedTextBox.Text = fahrzeug.Kennzeichen;
             herstellerComboBox.Text = fahrzeug.Hersteller;
             modellTextBox.Text = fahrzeug.Modell;
             anschaffungspreisTextBox.Text = fahrzeug.Anschaffungspreis.ToString();
             zulassungsdatumMaskedTextBox.Text = fahrzeug.Zulassungsdatum.ToString();
+
+            string kennzeichen = "";
+
+            foreach (char Buchstabe in fahrzeug.Kennzeichen)
+            {
+                if (Buchstabe != '-' || (Buchstabe == '-' && kennzeichen.Length == 3))
+                    kennzeichen += Buchstabe;
+                else if (Buchstabe == '-' && kennzeichen.Length == 1)
+                    kennzeichen += "  " + Buchstabe;
+                else if (Buchstabe == '-' && kennzeichen.Length == 2)
+                    kennzeichen += " " + Buchstabe;
+            }
+
+            kennzeichenMaskedTextBox.Text = kennzeichen;
         }
         private void fahrzeugArtComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -192,7 +205,7 @@ namespace Fahrzeugverleih
                             (fahrzeug as Motorrad).Hubraum = Convert.ToInt32(hubraumTextBox.Text);
                             break;
                     }
-                    fahrzeug.Kennzeichen = kennzeichenMaskedTextBox.Text.ToUpper();
+                    fahrzeug.Kennzeichen = kennzeichenMaskedTextBox.Text.ToUpper().Replace(" ", "");
                     fahrzeug.Hersteller = herstellerComboBox.Text;
                     fahrzeug.Modell = modellTextBox.Text;
                     fahrzeug.Anschaffungspreis = Convert.ToInt32(anschaffungspreisTextBox.Text);

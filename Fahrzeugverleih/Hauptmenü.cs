@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Fahrzeugverleih
 {
     public partial class HauptmenüForm : Form
@@ -16,7 +17,8 @@ namespace Fahrzeugverleih
         ParkhausVerwaltung parkhausVerwaltung;
         DateiVerwaltung dateiVerwaltung;
 
-        CurrencyManager currencyManager;
+        CurrencyManager fahrzeugeCurrencyManager;
+        CurrencyManager parkhäuserCurrencyManager;
 
         public HauptmenüForm()
         {
@@ -26,15 +28,19 @@ namespace Fahrzeugverleih
             parkhausVerwaltung = new ParkhausVerwaltung();
             dateiVerwaltung = new DateiVerwaltung();
 
-            fahrzeugeDataGridView.DataSource = fahrzeugVerwaltung.Fahrzeuge;            
+            fahrzeugeDataGridView.DataSource = fahrzeugVerwaltung.Fahrzeuge;
+            parkhäuserDataGridView.DataSource = parkhausVerwaltung.Parkhäuser;
         }
 
         private void HauptmenüForm_Load(object sender, EventArgs e)
         {
             fahrzeugVerwaltung.Fahrzeuge.AddRange(dateiVerwaltung.FahrzeugeAuslesen());
+            
+            fahrzeugeCurrencyManager = (CurrencyManager)fahrzeugeDataGridView.BindingContext[fahrzeugVerwaltung.Fahrzeuge];
+            parkhäuserCurrencyManager = (CurrencyManager)parkhäuserDataGridView.BindingContext[parkhausVerwaltung.Parkhäuser];
 
-            currencyManager = (CurrencyManager)fahrzeugeDataGridView.BindingContext[fahrzeugVerwaltung.Fahrzeuge];
-            currencyManager.Refresh();
+            fahrzeugeCurrencyManager.Refresh();
+            parkhäuserCurrencyManager.Refresh();
             gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
         }
         private void HauptmenüForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -66,7 +72,7 @@ namespace Fahrzeugverleih
                         if (!kennzeichenVorhanden)
                         {
                             fahrzeugVerwaltung.FahrzeugHinzufügen(fahrzeugErstellenForm.Fahrzeug);
-                            currencyManager.Refresh();
+                            fahrzeugeCurrencyManager.Refresh();
                             gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
                         }
                         else
@@ -80,54 +86,41 @@ namespace Fahrzeugverleih
         }
         private void fahrzeugeDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            int ausgewähltesFahrzeug = 0;
+            //int ausgewähltesFahrzeug = 0;
 
             using (FahrzeugBearbeiten fahrzeugBearbeitenForm = new FahrzeugBearbeiten())
             {
-                for (int i = 0; i < fahrzeugVerwaltung.Fahrzeuge.Count; i++)
-                {
-                    if (fahrzeugVerwaltung.Fahrzeuge[i] == (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug))
-                    {
-                        if (fahrzeugVerwaltung.Fahrzeuge[i] is PKW)
-                            fahrzeugBearbeitenForm.Fahrzeug = (fahrzeugVerwaltung.Fahrzeuge[i] as PKW);
-                        else if (fahrzeugVerwaltung.Fahrzeuge[i] is LKW)
-                            fahrzeugBearbeitenForm.Fahrzeug = (fahrzeugVerwaltung.Fahrzeuge[i] as LKW);
-                        else if (fahrzeugVerwaltung.Fahrzeuge[i] is Motorrad)
-                            fahrzeugBearbeitenForm.Fahrzeug = (fahrzeugVerwaltung.Fahrzeuge[i] as Motorrad);
-
-                        ausgewähltesFahrzeug = i;
-                    }
-                }
-                if (fahrzeugBearbeitenForm.Fahrzeug == null)
-                    MessageBox.Show("ERROR 404!");
-
+                Fahrzeug fahrzeug = (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug);
+                fahrzeugBearbeitenForm.Fahrzeug = fahrzeug;
+                
                 fahrzeugBearbeitenForm.ShowDialog();
 
-                fahrzeugVerwaltung.Fahrzeuge[ausgewähltesFahrzeug] = fahrzeugBearbeitenForm.Fahrzeug;
-                sucheTextBox.Text = "";
-                currencyManager.Refresh();
+                fahrzeugVerwaltung.Fahrzeuge[fahrzeugVerwaltung.Fahrzeuge.IndexOf(fahrzeug)] = fahrzeugBearbeitenForm.Fahrzeug;
+
+                fahrzeugeKennzeichenSucheTextBox.Text = "";
+                fahrzeugeCurrencyManager.Refresh();
                 gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
             }
         }
-        private void sucheTextBox_TextChanged(object sender, EventArgs e)
+        private void fahrzeugeKennzeichenSucheTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (sucheTextBox.Text.Length > 0 && sucheTextBox.Text.Last() == ' ' && sucheTextBox.Text.Count(c => c == '-') < 1)
+            if (fahrzeugeKennzeichenSucheTextBox.Text.Length > 0 && fahrzeugeKennzeichenSucheTextBox.Text.Last() == ' ' && fahrzeugeKennzeichenSucheTextBox.Text.Count(c => c == '-') < 1)
             {
-                sucheTextBox.Text = sucheTextBox.Text.Remove(sucheTextBox.Text.Length - 1, 1) + '-';
-                sucheTextBox.SelectionStart = sucheTextBox.Text.Length;
+                fahrzeugeKennzeichenSucheTextBox.Text = fahrzeugeKennzeichenSucheTextBox.Text.Remove(fahrzeugeKennzeichenSucheTextBox.Text.Length - 1, 1) + '-';
+                fahrzeugeKennzeichenSucheTextBox.SelectionStart = fahrzeugeKennzeichenSucheTextBox.Text.Length;
             }
 
-            currencyManager.SuspendBinding();
+            fahrzeugeCurrencyManager.SuspendBinding();
 
             foreach (DataGridViewRow Zeile in fahrzeugeDataGridView.Rows)
             {
-                if (!Zeile.Cells[0].Value.ToString().Contains(sucheTextBox.Text.ToUpper()))
+                if (!Zeile.Cells[0].Value.ToString().Contains(fahrzeugeKennzeichenSucheTextBox.Text.ToUpper()))
                     Zeile.Visible = false;
                 else
                     Zeile.Visible = true;
             }
 
-            currencyManager.ResumeBinding();
+            fahrzeugeCurrencyManager.ResumeBinding();
         }
         private void fahrzeugLöschenButton_Click(object sender, EventArgs e)
         {
@@ -138,13 +131,36 @@ namespace Fahrzeugverleih
                     if (fahrzeugVerwaltung.Fahrzeuge[i] == (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug))
                     {
                         fahrzeugVerwaltung.Fahrzeuge.Remove(fahrzeugVerwaltung.Fahrzeuge[i]);
-                        currencyManager.Refresh();
+                        fahrzeugeCurrencyManager.Refresh();
                         gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
 
                         i = fahrzeugVerwaltung.Fahrzeuge.Count() + 1;
                     }
                 }
             }
+        }
+        #endregion
+
+        #region Parkhäuser
+        private void parkhäuserDataGridView_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+        private void parkhausErstellenButton_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void parkhausLöschenButton_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void parkhäuserKennzeichenSucheTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void fahrzeugeListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
         #endregion
     }

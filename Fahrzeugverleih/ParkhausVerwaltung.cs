@@ -15,6 +15,13 @@ namespace Fahrzeugverleih
             parkhäuser = new List<Parkhaus>();
         }
 
+        #region Eigenschaften
+        public List<Parkhaus> Parkhäuser
+        {
+            get { return parkhäuser; }
+            set { parkhäuser = value; }
+        }
+        #endregion
         public bool ParkhausZuweisung(Fahrzeug fahrzeug)
         {
             if (fahrzeug is PKW)
