@@ -22,6 +22,7 @@ namespace Fahrzeugverleih
             set { parkhäuser = value; }
         }
         #endregion
+
         public bool ParkhausZuweisung(Fahrzeug fahrzeug)
         {
             if (fahrzeug is PKW)
@@ -58,7 +59,7 @@ namespace Fahrzeugverleih
                 {
                     for (int i = 0; i < parkhaus.Parkplätze.Count; i++)
                     {
-                        if (parkhaus.Parkplätze[i].ParkplatzTyp == ParkplatzTyp.Motorad && parkhaus.Parkplätze[i].Fahrzeug == null)
+                        if (parkhaus.Parkplätze[i].ParkplatzTyp == ParkplatzTyp.Motorrad && parkhaus.Parkplätze[i].Fahrzeug == null)
                         {
                             parkhaus.Parkplätze[i].Fahrzeug = fahrzeug;
                             return true;
@@ -80,35 +81,6 @@ namespace Fahrzeugverleih
                 }
             }
             return null;
-        }
-        public void NeuesParkhausBauen(int PLZ, string Ort, string Straße, int PKWParkplätze, int LKWParkplätze, int MotoradParkplätze)
-        {
-            Parkhaus parkhaus = new Parkhaus();
-
-            parkhaus.PLZ = PLZ;
-            parkhaus.Ort = Ort;
-            parkhaus.Straße = Straße;
-
-            for (int i = 0; i < PKWParkplätze + LKWParkplätze + MotoradParkplätze; i++)
-            {
-                for (int j = 0; j <= PKWParkplätze; j++)
-                {
-                    parkhaus.Parkplätze.Add(new Parkplatz(ParkplatzTyp.PKW));
-                    parkhaus.Parkplätze[j].Stellplatznummer += j.ToString();
-                }
-                for (int j = 0; j <= LKWParkplätze; j++)
-                {
-                    parkhaus.Parkplätze.Add(new Parkplatz(ParkplatzTyp.LKW));
-                    parkhaus.Parkplätze[j].Stellplatznummer += j.ToString();
-                }
-                for (int j = 0; j <= MotoradParkplätze; j++)
-                {
-                    parkhaus.Parkplätze.Add(new Parkplatz(ParkplatzTyp.Motorad));
-                    parkhaus.Parkplätze[j].Stellplatznummer += j.ToString();
-                }
-            }
-
-            parkhäuser.Add(parkhaus);
         }
     }
 }

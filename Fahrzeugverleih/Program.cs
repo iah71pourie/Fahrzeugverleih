@@ -16,9 +16,23 @@ namespace Fahrzeugverleih
         static void Main()
         {
             if (!File.Exists(@"fahrzeuge.txt"))
-                File.Create(@"fahrzeuge.txt");
+            {
+                using (FileStream fileStream = new FileStream(@"fahrzeuge5.txt", FileMode.Create))
+                {
+                    fileStream.Dispose();
+                }
+
+                Application.Restart();
+            }
             if (!File.Exists(@"parkhäuser.txt"))
-                File.Create(@"parkhäuser.txt");
+            {
+                using (FileStream fileStream = new FileStream(@"parkhäuser.txt", FileMode.Create))
+                {
+                    fileStream.Dispose();
+                }
+
+                Application.Restart();
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -204,10 +204,10 @@ namespace Fahrzeugverleih
                             fahrzeug = new LKW();
 
                             (fahrzeug as LKW).AchsenAnzahl = Convert.ToInt32(achsenanzahlTextBox.Text);
-                            (fahrzeug as LKW).Zuladung = Convert.ToInt32(zuladungTextBox.Text);
+                            (fahrzeug as LKW).Zuladung = Convert.ToDouble(zuladungTextBox.Text);
                             break;
 
-                        case "Motorad":
+                        case "Motorrad":
                             fahrzeug = new Motorrad();
 
                             (fahrzeug as Motorrad).Hubraum = Convert.ToInt32(hubraumTextBox.Text);

@@ -9,12 +9,12 @@ namespace Fahrzeugverleih
     class LKW : Fahrzeug
     {
         private int achsenanzahl;
-        private int zuladung;
+        private double zuladung;
 
         public LKW()
         {
             achsenanzahl = 0;
-            zuladung = 0;
+            zuladung = 0.0;
         }
 
         #region Eigenschaften
@@ -23,7 +23,7 @@ namespace Fahrzeugverleih
             get { return achsenanzahl; }
             set { achsenanzahl = value; }
         }
-        public int Zuladung
+        public double Zuladung
         {
             get { return zuladung; }
             set { zuladung = value; }

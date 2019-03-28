@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Fahrzeugverleih
 {
-    class Parkplatz
+    public class Parkplatz
     {
         private string stellplatznummer;
         private Fahrzeug fahrzeug;
         private ParkplatzTyp parkplatzTyp;
+
         public Parkplatz(ParkplatzTyp parkplatzTyp)
         {
             this.parkplatzTyp = parkplatzTyp;
@@ -27,7 +28,7 @@ namespace Fahrzeugverleih
                     stellplatznummer = "L";
                     break;
 
-                case ParkplatzTyp.Motorad:
+                case ParkplatzTyp.Motorrad:
                     fahrzeug = new Motorrad();
                     stellplatznummer = "M";
                     break;
@@ -57,6 +58,6 @@ namespace Fahrzeugverleih
     {
         PKW,
         LKW,
-        Motorad
+        Motorrad
     }
 }

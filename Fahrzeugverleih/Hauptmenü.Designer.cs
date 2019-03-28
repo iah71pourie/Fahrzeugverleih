@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.fahrzeugErstellenButton = new System.Windows.Forms.Button();
             this.fahrzeugLöschenButton = new System.Windows.Forms.Button();
             this.fahrzeugeKennzeichenSucheTextBox = new System.Windows.Forms.TextBox();
@@ -46,6 +46,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.parkhäuserKennzeichenSucheTextBox = new System.Windows.Forms.TextBox();
             this.parkhäuserDataGridView = new System.Windows.Forms.DataGridView();
+            this.parkplatzZuweisenButton = new System.Windows.Forms.Button();
+            this.parkplatzTrennenButton = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.fahrzeugeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fahrzeugeDataGridView)).BeginInit();
@@ -107,8 +109,8 @@
             this.fahrzeugeListBox.Location = new System.Drawing.Point(803, 6);
             this.fahrzeugeListBox.Name = "fahrzeugeListBox";
             this.fahrzeugeListBox.Size = new System.Drawing.Size(287, 436);
-            this.fahrzeugeListBox.TabIndex = 5;
-            this.fahrzeugeListBox.SelectedIndexChanged += new System.EventHandler(this.fahrzeugeListBox_SelectedIndexChanged);
+            this.fahrzeugeListBox.TabIndex = 6;
+            this.fahrzeugeListBox.DoubleClick += new System.EventHandler(this.fahrzeugeListBox_DoubleClick);
             // 
             // parkhausLöschenButton
             // 
@@ -117,7 +119,7 @@
             this.parkhausLöschenButton.Location = new System.Drawing.Point(682, 392);
             this.parkhausLöschenButton.Name = "parkhausLöschenButton";
             this.parkhausLöschenButton.Size = new System.Drawing.Size(115, 50);
-            this.parkhausLöschenButton.TabIndex = 8;
+            this.parkhausLöschenButton.TabIndex = 5;
             this.parkhausLöschenButton.Text = "Parkhaus löschen";
             this.parkhausLöschenButton.UseVisualStyleBackColor = true;
             this.parkhausLöschenButton.Click += new System.EventHandler(this.parkhausLöschenButton_Click);
@@ -129,7 +131,7 @@
             this.parkhausErstellenButton.Location = new System.Drawing.Point(561, 392);
             this.parkhausErstellenButton.Name = "parkhausErstellenButton";
             this.parkhausErstellenButton.Size = new System.Drawing.Size(115, 50);
-            this.parkhausErstellenButton.TabIndex = 9;
+            this.parkhausErstellenButton.TabIndex = 4;
             this.parkhausErstellenButton.Text = "Parkhaus erstellen";
             this.parkhausErstellenButton.UseVisualStyleBackColor = true;
             this.parkhausErstellenButton.Click += new System.EventHandler(this.parkhausErstellenButton_Click);
@@ -142,7 +144,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1104, 474);
-            this.tabControl.TabIndex = 12;
+            this.tabControl.TabIndex = 0;
             // 
             // fahrzeugeTabPage
             // 
@@ -192,14 +194,14 @@
             this.fahrzeugeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.fahrzeugeDataGridView.ColumnHeadersHeight = 25;
             this.fahrzeugeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.fahrzeugeDataGridView.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.fahrzeugeDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.fahrzeugeDataGridView.Location = new System.Drawing.Point(6, 6);
             this.fahrzeugeDataGridView.MultiSelect = false;
             this.fahrzeugeDataGridView.Name = "fahrzeugeDataGridView";
@@ -214,6 +216,8 @@
             // 
             // parkhäuserTabPage
             // 
+            this.parkhäuserTabPage.Controls.Add(this.parkplatzTrennenButton);
+            this.parkhäuserTabPage.Controls.Add(this.parkplatzZuweisenButton);
             this.parkhäuserTabPage.Controls.Add(this.label1);
             this.parkhäuserTabPage.Controls.Add(this.parkhäuserKennzeichenSucheTextBox);
             this.parkhäuserTabPage.Controls.Add(this.parkhäuserDataGridView);
@@ -236,7 +240,7 @@
             this.label1.Location = new System.Drawing.Point(558, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 18);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Kennzeichen Suche:";
             // 
             // parkhäuserKennzeichenSucheTextBox
@@ -246,7 +250,7 @@
             this.parkhäuserKennzeichenSucheTextBox.Location = new System.Drawing.Point(561, 28);
             this.parkhäuserKennzeichenSucheTextBox.Name = "parkhäuserKennzeichenSucheTextBox";
             this.parkhäuserKennzeichenSucheTextBox.Size = new System.Drawing.Size(236, 26);
-            this.parkhäuserKennzeichenSucheTextBox.TabIndex = 11;
+            this.parkhäuserKennzeichenSucheTextBox.TabIndex = 1;
             this.parkhäuserKennzeichenSucheTextBox.TextChanged += new System.EventHandler(this.parkhäuserKennzeichenSucheTextBox_TextChanged);
             // 
             // parkhäuserDataGridView
@@ -258,14 +262,14 @@
             this.parkhäuserDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.parkhäuserDataGridView.ColumnHeadersHeight = 25;
             this.parkhäuserDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.parkhäuserDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.parkhäuserDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.parkhäuserDataGridView.Location = new System.Drawing.Point(11, 6);
             this.parkhäuserDataGridView.MultiSelect = false;
             this.parkhäuserDataGridView.Name = "parkhäuserDataGridView";
@@ -275,8 +279,33 @@
             this.parkhäuserDataGridView.RowTemplate.Height = 25;
             this.parkhäuserDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.parkhäuserDataGridView.Size = new System.Drawing.Size(544, 436);
-            this.parkhäuserDataGridView.TabIndex = 10;
+            this.parkhäuserDataGridView.TabIndex = 0;
+            this.parkhäuserDataGridView.SelectionChanged += new System.EventHandler(this.parkhäuserDataGridView_SelectionChanged);
             this.parkhäuserDataGridView.DoubleClick += new System.EventHandler(this.parkhäuserDataGridView_DoubleClick);
+            // 
+            // parkplatzZuweisenButton
+            // 
+            this.parkplatzZuweisenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.parkplatzZuweisenButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.parkplatzZuweisenButton.Location = new System.Drawing.Point(561, 314);
+            this.parkplatzZuweisenButton.Name = "parkplatzZuweisenButton";
+            this.parkplatzZuweisenButton.Size = new System.Drawing.Size(115, 50);
+            this.parkplatzZuweisenButton.TabIndex = 2;
+            this.parkplatzZuweisenButton.Text = "Parkplatz zuweisen";
+            this.parkplatzZuweisenButton.UseVisualStyleBackColor = true;
+            this.parkplatzZuweisenButton.Click += new System.EventHandler(this.parkplatzZuweisenButton_Click);
+            // 
+            // parkplatzTrennenButton
+            // 
+            this.parkplatzTrennenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.parkplatzTrennenButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.parkplatzTrennenButton.Location = new System.Drawing.Point(682, 314);
+            this.parkplatzTrennenButton.Name = "parkplatzTrennenButton";
+            this.parkplatzTrennenButton.Size = new System.Drawing.Size(115, 50);
+            this.parkplatzTrennenButton.TabIndex = 3;
+            this.parkplatzTrennenButton.Text = "Parkplatz trennen";
+            this.parkplatzTrennenButton.UseVisualStyleBackColor = true;
+            this.parkplatzTrennenButton.Click += new System.EventHandler(this.parkplatzTrennenButton_Click);
             // 
             // HauptmenüForm
             // 
@@ -319,6 +348,8 @@
         private System.Windows.Forms.DataGridView parkhäuserDataGridView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox parkhäuserKennzeichenSucheTextBox;
+        private System.Windows.Forms.Button parkplatzTrennenButton;
+        private System.Windows.Forms.Button parkplatzZuweisenButton;
     }
 }
 

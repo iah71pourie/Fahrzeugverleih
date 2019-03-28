@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="DateiVerwaltung.cs" />
     <Compile Include="Fahrzeug.cs" />
+    <Compile Include="FahrzeugAuswahl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FahrzeugAuswahl.Designer.cs">
+      <DependentUpon>FahrzeugAuswahl.cs</DependentUpon>
+    </Compile>
     <Compile Include="FahrzeugForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,25 +70,28 @@
     <Compile Include="LKW.cs" />
     <Compile Include="Motorrad.cs" />
     <Compile Include="Parkhaus.cs" />
-    <Compile Include="ParkhausErstellen.cs">
+    <Compile Include="ParkhausForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ParkhausErstellen.Designer.cs">
-      <DependentUpon>ParkhausErstellen.cs</DependentUpon>
+    <Compile Include="ParkhausForm.Designer.cs">
+      <DependentUpon>ParkhausForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ParkhausVerwaltung.cs" />
     <Compile Include="Parkplatz.cs" />
     <Compile Include="PKW.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FahrzeugAuswahl.resx">
+      <DependentUpon>FahrzeugAuswahl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FahrzeugForm.resx">
       <DependentUpon>FahrzeugForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hauptmenü.resx">
       <DependentUpon>Hauptmenü.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ParkhausErstellen.resx">
-      <DependentUpon>ParkhausErstellen.cs</DependentUpon>
+    <EmbeddedResource Include="ParkhausForm.resx">
+      <DependentUpon>ParkhausForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

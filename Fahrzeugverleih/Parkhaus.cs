@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fahrzeugverleih
 {
-    class Parkhaus
+    public class Parkhaus
     {
         private string ort;
         private int plz;
