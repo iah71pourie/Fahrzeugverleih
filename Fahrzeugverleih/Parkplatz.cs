@@ -9,30 +9,12 @@ namespace Fahrzeugverleih
     public class Parkplatz
     {
         private string stellplatznummer;
-        private Fahrzeug fahrzeug;
+        private string kennzeichen;
         private ParkplatzTyp parkplatzTyp;
 
         public Parkplatz(ParkplatzTyp parkplatzTyp)
         {
             this.parkplatzTyp = parkplatzTyp;
-
-            switch (parkplatzTyp)
-            {
-                case ParkplatzTyp.PKW:
-                    fahrzeug = new PKW();
-                    stellplatznummer = "P";
-                    break;
-
-                case ParkplatzTyp.LKW:
-                    fahrzeug = new LKW();
-                    stellplatznummer = "L";
-                    break;
-
-                case ParkplatzTyp.Motorrad:
-                    fahrzeug = new Motorrad();
-                    stellplatznummer = "M";
-                    break;
-            }
         }
 
         #region Eigenschaften
@@ -46,10 +28,10 @@ namespace Fahrzeugverleih
             get { return stellplatznummer; }
             set { stellplatznummer = value; }
         }
-        public Fahrzeug Fahrzeug
+        public string Kennzeichen
         {
-            get { return fahrzeug; }
-            set { fahrzeug = value; }
+            get { return kennzeichen; }
+            set { kennzeichen = value; }
         }
         #endregion
     }

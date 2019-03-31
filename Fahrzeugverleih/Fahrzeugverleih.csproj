@@ -48,11 +48,11 @@
   <ItemGroup>
     <Compile Include="DateiVerwaltung.cs" />
     <Compile Include="Fahrzeug.cs" />
-    <Compile Include="FahrzeugAuswahl.cs">
+    <Compile Include="FahrzeugAuswahlForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FahrzeugAuswahl.Designer.cs">
-      <DependentUpon>FahrzeugAuswahl.cs</DependentUpon>
+    <Compile Include="FahrzeugAuswahlForm.Designer.cs">
+      <DependentUpon>FahrzeugAuswahlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FahrzeugForm.cs">
       <SubType>Form</SubType>
@@ -81,8 +81,8 @@
     <Compile Include="PKW.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FahrzeugAuswahl.resx">
-      <DependentUpon>FahrzeugAuswahl.cs</DependentUpon>
+    <EmbeddedResource Include="FahrzeugAuswahlForm.resx">
+      <DependentUpon>FahrzeugAuswahlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FahrzeugForm.resx">
       <DependentUpon>FahrzeugForm.cs</DependentUpon>

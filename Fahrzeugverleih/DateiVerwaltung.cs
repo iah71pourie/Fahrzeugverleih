@@ -57,28 +57,7 @@ namespace Fahrzeugverleih
                 {
                     foreach (Parkplatz parkplatz in parkhaus.Parkplätze)
                     {
-                        writer.Write(parkplatz.ParkplatzTyp.ToString() + ";" + parkplatz.Stellplatznummer.ToString() + ";");
-
-                        writer.Write(parkplatz.Fahrzeug.Hersteller.ToString() + ";" + parkplatz.Fahrzeug.Modell.ToString() + ";" +
-                            parkplatz.Fahrzeug.Kennzeichen.ToString() + ";" + parkplatz.Fahrzeug.Zulassungsdatum.ToString() + ";" +
-                            parkplatz.Fahrzeug.Anschaffungspreis.ToString() + ";");
-
-                        switch(parkplatz.ParkplatzTyp)
-                        {
-                            case ParkplatzTyp.PKW:
-                                writer.Write((parkplatz.Fahrzeug as PKW).Hubraum.ToString() + ";" + (parkplatz.Fahrzeug as PKW).Leistung.ToString() + ";" + (parkplatz.Fahrzeug as PKW).Schadstoffklasse.ToString() + ";");
-                                break;
-
-                            case ParkplatzTyp.LKW:
-
-                                writer.Write((parkplatz.Fahrzeug as LKW).Zuladung.ToString() + ";" + (parkplatz.Fahrzeug as LKW).AchsenAnzahl.ToString() + ";");
-                                break;
-
-                            case ParkplatzTyp.Motorrad:
-
-                                writer.Write((parkplatz.Fahrzeug as Motorrad).Hubraum.ToString() + ";");
-                                break;
-                        }
+                        writer.Write(parkplatz.ParkplatzTyp.ToString() + ";" + parkplatz.Stellplatznummer.ToString() + ";" + parkplatz.Kennzeichen + ";");
 
                         writer.WriteLine();
                     }
@@ -178,7 +157,7 @@ namespace Fahrzeugverleih
                 parkhaus.Ort = ParkhäuserZeilenInhalt[1];
                 parkhaus.Straße = ParkhäuserZeilenInhalt[2];
 
-                string[] ParkhausDateiInhalt = File.ReadAllLines(@"" + parkhaus.PLZ + ";" +  parkhaus.Ort + ";" + parkhaus.Straße + ".txt");
+                string[] ParkhausDateiInhalt = File.ReadAllLines(@"" + parkhaus.PLZ + ";" + parkhaus.Ort + ";" + parkhaus.Straße + ".txt");
 
                 for (int i = 0; i < ParkhausDateiInhalt.Length; i++)
                 {
@@ -206,56 +185,7 @@ namespace Fahrzeugverleih
                     }
 
                     parkhaus.Parkplätze[i].Stellplatznummer = ParkhausZeilenInhalt[1];
-
-                    switch (ParkhausZeilenInhalt.Length)
-                    {
-                        case 11:
-
-                            parkhaus.Parkplätze[i].Fahrzeug = new PKW();
-
-                            parkhaus.Parkplätze[i].Fahrzeug.Hersteller = ParkhausZeilenInhalt[2];
-                            parkhaus.Parkplätze[i].Fahrzeug.Modell = ParkhausZeilenInhalt[3];
-                            parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen = ParkhausZeilenInhalt[4];
-                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsdatum = Convert.ToDateTime(ParkhausZeilenInhalt[5]);
-                            parkhaus.Parkplätze[i].Fahrzeug.Anschaffungspreis = Convert.ToInt32(ParkhausZeilenInhalt[6]);
-                            (parkhaus.Parkplätze[i].Fahrzeug as PKW).Hubraum = Convert.ToInt32(ParkhausZeilenInhalt[7]);
-                            (parkhaus.Parkplätze[i].Fahrzeug as PKW).Leistung = Convert.ToInt32(ParkhausZeilenInhalt[8]);
-                            (parkhaus.Parkplätze[i].Fahrzeug as PKW).Schadstoffklasse = Convert.ToInt32(ParkhausZeilenInhalt[9]);
-                            break;
-
-                        case 10:
-
-                            parkhaus.Parkplätze[i].Fahrzeug = new LKW();
-
-                            parkhaus.Parkplätze[i].Fahrzeug.Hersteller = ParkhausZeilenInhalt[2];
-                            parkhaus.Parkplätze[i].Fahrzeug.Modell = ParkhausZeilenInhalt[3];
-                            parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen = ParkhausZeilenInhalt[4];
-                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsdatum = Convert.ToDateTime(ParkhausZeilenInhalt[5]);
-                            parkhaus.Parkplätze[i].Fahrzeug.Anschaffungspreis = Convert.ToInt32(ParkhausZeilenInhalt[6]);
-                            (parkhaus.Parkplätze[i].Fahrzeug as LKW).Zuladung = Convert.ToDouble(ParkhausZeilenInhalt[7]);
-                            (parkhaus.Parkplätze[i].Fahrzeug as LKW).AchsenAnzahl = Convert.ToInt32(ParkhausZeilenInhalt[8]);
-                            break;
-
-                        case 9:
-
-                            parkhaus.Parkplätze[i].Fahrzeug = new Motorrad();
-
-                            parkhaus.Parkplätze[i].Fahrzeug.Hersteller = ParkhausZeilenInhalt[2];
-                            parkhaus.Parkplätze[i].Fahrzeug.Modell = ParkhausZeilenInhalt[3];
-                            parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen = ParkhausZeilenInhalt[4];
-                            parkhaus.Parkplätze[i].Fahrzeug.Zulassungsdatum = Convert.ToDateTime(ParkhausZeilenInhalt[5]);
-                            parkhaus.Parkplätze[i].Fahrzeug.Anschaffungspreis = Convert.ToInt32(ParkhausZeilenInhalt[6]);
-                            (parkhaus.Parkplätze[i].Fahrzeug as Motorrad).Hubraum = Convert.ToInt32(ParkhausZeilenInhalt[7]);
-
-                            break;
-
-                        default:
-
-                            parkhaus.Parkplätze[i].Fahrzeug = null;
-                            break;
-                    }
-
-
+                    parkhaus.Parkplätze[i].Kennzeichen = ParkhausZeilenInhalt[2];
                 }
 
                 parkhäuser.Add(parkhaus);

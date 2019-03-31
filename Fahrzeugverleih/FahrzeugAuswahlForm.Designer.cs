@@ -1,6 +1,6 @@
 ﻿namespace Fahrzeugverleih
 {
-    partial class FahrzeugAuswahl
+    partial class FahrzeugAuswahlForm
     {
         /// <summary>
         /// Required designer variable.

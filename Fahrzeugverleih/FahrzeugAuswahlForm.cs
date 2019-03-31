@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace Fahrzeugverleih
 {
-    public partial class FahrzeugAuswahl : Form
+    public partial class FahrzeugAuswahlForm : Form
     {
         Fahrzeug fahrzeug;
         List<Fahrzeug> fahrzeuge;
-        public FahrzeugAuswahl()
+        public FahrzeugAuswahlForm()
         {
             InitializeComponent();
             
@@ -35,6 +35,7 @@ namespace Fahrzeugverleih
         private void FahrzeugAuswahl_Load(object sender, EventArgs e)
         {
             fahrzeugeDataGridView.DataSource = fahrzeuge;
+            fahrzeug = null;
         }
         private void fahrzeugAuswählenButton_Click(object sender, EventArgs e)
         {

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -99,13 +94,19 @@ namespace Fahrzeugverleih
             {
                 bool kennzeichenVorhanden;
 
-                Fahrzeug fahrzeug = (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug);
-                fahrzeugForm.Fahrzeug = fahrzeug;
+                Fahrzeug fahrzeug = null;
+
+                if (fahrzeugeDataGridView.CurrentRow != null)
+                {
+                    fahrzeug = (fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug);
+                    fahrzeugForm.Fahrzeug = fahrzeug;
+                }
 
                 do
                 {
                     kennzeichenVorhanden = false;
-                    fahrzeugForm.ShowDialog();
+                    if (fahrzeug != null)
+                        fahrzeugForm.ShowDialog();
 
                     if (fahrzeugForm.Fahrzeug != null)
                     {
@@ -119,18 +120,33 @@ namespace Fahrzeugverleih
                         {
                             fahrzeugVerwaltung.Fahrzeuge[fahrzeugVerwaltung.Fahrzeuge.IndexOf(fahrzeug)] = fahrzeugForm.Fahrzeug;
 
+                            if (fahrzeug.Kennzeichen != fahrzeugForm.Fahrzeug.Kennzeichen)
+                            {
+                                foreach (Parkhaus parkhaus in parkhausVerwaltung.Parkhäuser)
+                                {
+                                    foreach (Parkplatz parkplatz in parkhaus.Parkplätze)
+                                    {
+                                        if (parkplatz.Kennzeichen == fahrzeug.Kennzeichen)
+                                        {
+                                            parkplatz.Kennzeichen = fahrzeugForm.Fahrzeug.Kennzeichen;
+                                            break;
+                                        }
+                                    }
+
+                                }
+                            }
+
                             fahrzeugeKennzeichenSucheTextBox.Text = "";
                             fahrzeugeCurrencyManager.Refresh();
                             gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
+
+                            parkhäuserCurrencyManager.Refresh();
+                            parkhäuserDataGridView_SelectionChanged(sender, e);
                         }
                         else
                         {
                             MessageBox.Show("Das Kennzeichen ist bereits vergeben!");
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Das Kennzeichen ist bereits vergeben!");
                     }
                 }
                 while (kennzeichenVorhanden);
@@ -154,6 +170,15 @@ namespace Fahrzeugverleih
                     Zeile.Visible = true;
             }
 
+            foreach (DataGridViewRow Zeile in fahrzeugeDataGridView.Rows)
+            {
+                if (Zeile.Visible == true)
+                {
+                    Zeile.Selected = true;
+                    break;
+                }
+            }
+
             fahrzeugeCurrencyManager.ResumeBinding();
         }
         private void fahrzeugLöschenButton_Click(object sender, EventArgs e)
@@ -164,21 +189,22 @@ namespace Fahrzeugverleih
                 {
                     foreach (Parkplatz parkplatz in parkhaus.Parkplätze)
                     {
-                        if (parkplatz.Fahrzeug.Equals(fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug))
-                            if (parkplatz.ParkplatzTyp.Equals(ParkplatzTyp.PKW))
-                                parkplatz.Fahrzeug = new PKW();
-                            else if (parkplatz.ParkplatzTyp.Equals(ParkplatzTyp.LKW))
-                                parkplatz.Fahrzeug = new LKW();
-                            else if (parkplatz.ParkplatzTyp.Equals(ParkplatzTyp.Motorrad))
-                                parkplatz.Fahrzeug = new Motorrad();
+                        if (parkplatz.Kennzeichen.Equals((fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug).Kennzeichen))
+                        {
+                            parkplatz.Kennzeichen = "";
+
+                            break;
+                        }
                     }
                 }
 
                 fahrzeugVerwaltung.Fahrzeuge.Remove(fahrzeugeDataGridView.CurrentRow.DataBoundItem as Fahrzeug);
 
                 fahrzeugeCurrencyManager.Refresh();
-                parkhäuserCurrencyManager.Refresh();
                 gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
+
+                parkhäuserCurrencyManager.Refresh();
+                parkhäuserDataGridView_SelectionChanged(sender, e);
             }
         }
         #endregion
@@ -186,42 +212,45 @@ namespace Fahrzeugverleih
         #region Parkhäuser
         private void parkhäuserDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            using (ParkhausForm parkhausForm = new ParkhausForm())
+            if (parkhäuserDataGridView.CurrentRow != null)
             {
-                bool parkhausVorhanden;
-                do
+                using (ParkhausForm parkhausForm = new ParkhausForm())
                 {
-                    parkhausVorhanden = false;
-                    Parkhaus parkhaus = (parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus);
-                    parkhausForm.Parkhaus = parkhaus;
-
-                    parkhausForm.ShowDialog();
-
-                    if (parkhausForm.Parkhaus != null)
+                    bool parkhausVorhanden;
+                    do
                     {
-                        foreach (Parkhaus parkhaus1 in parkhausVerwaltung.Parkhäuser)
-                        {
-                            if (parkhausForm.Parkhaus.Ort + parkhausForm.Parkhaus.PLZ.ToString() + parkhausForm.Parkhaus.Straße == parkhaus1.Ort + parkhaus1.PLZ.ToString() + parkhaus1.Straße && parkhaus1 != parkhaus)
-                                parkhausVorhanden = true;
-                        }
+                        parkhausVorhanden = false;
+                        Parkhaus parkhaus = (parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus);
+                        parkhausForm.Parkhaus = parkhaus;
 
-                        if (!parkhausVorhanden)
-                        {
-                            parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhaus)] = parkhausForm.Parkhaus;
+                        parkhausForm.ShowDialog();
 
-                            parkhäuserCurrencyManager.Refresh();
+                        if (parkhausForm.Parkhaus != null)
+                        {
+                            foreach (Parkhaus parkhaus1 in parkhausVerwaltung.Parkhäuser)
+                            {
+                                if (parkhausForm.Parkhaus.Ort + parkhausForm.Parkhaus.PLZ.ToString() + parkhausForm.Parkhaus.Straße == parkhaus1.Ort + parkhaus1.PLZ.ToString() + parkhaus1.Straße && parkhaus1 != parkhaus)
+                                    parkhausVorhanden = true;
+                            }
+
+                            if (!parkhausVorhanden)
+                            {
+                                parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhaus)] = parkhausForm.Parkhaus;
+
+                                parkhäuserCurrencyManager.Refresh();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Das Kennzeichen ist bereits vergeben!");
+                            }
                         }
                         else
                         {
                             MessageBox.Show("Das Kennzeichen ist bereits vergeben!");
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Das Kennzeichen ist bereits vergeben!");
-                    }
+                    while (parkhausVorhanden);
                 }
-                while (parkhausVorhanden);
             }
         }
         private void parkhausErstellenButton_Click(object sender, EventArgs e)
@@ -283,10 +312,10 @@ namespace Fahrzeugverleih
             {
                 for (int i = 0; i < parkhaus.Parkplätze.Count; i++)
                 {
-                    if (parkhaus.Parkplätze[i].Fahrzeug.Kennzeichen.Contains(parkhäuserKennzeichenSucheTextBox.Text.ToUpper()))
+                    if (parkhaus.Parkplätze[i].Kennzeichen.Contains(parkhäuserKennzeichenSucheTextBox.Text.ToUpper()))
                     {
                         ausgewählteParkhäuser.Add(parkhaus);
-                        i = parkhaus.Parkplätze.Count;
+                        break;
                     }
                 }
             }
@@ -312,6 +341,16 @@ namespace Fahrzeugverleih
             }
 
             parkhäuserCurrencyManager.ResumeBinding();
+            parkhäuserDataGridView.ClearSelection();
+
+            foreach (DataGridViewRow Zeile in fahrzeugeDataGridView.Rows)
+            {
+                if (Zeile.Visible)
+                {
+                    Zeile.Selected = true;
+                    break;
+                }
+            }
         }
 
         private void parkhäuserDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -320,70 +359,19 @@ namespace Fahrzeugverleih
 
             try
             {
-                foreach (Parkplatz parkplatz in (parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus).Parkplätze)
+                if (parkhäuserDataGridView.CurrentRow != null && parkhäuserDataGridView.CurrentRow.DataBoundItem != null && parkhäuserDataGridView.CurrentRow.Visible)
                 {
-                    fahrzeugeListBox.Items.Add(parkplatz.Stellplatznummer + ": " + parkplatz.Fahrzeug.Kennzeichen);
+                    foreach (Parkplatz parkplatz in (parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus).Parkplätze)
+                    {
+                        fahrzeugeListBox.Items.Add(parkplatz.Stellplatznummer + ": " + parkplatz.Kennzeichen);
+                    }
                 }
             }
             catch { }
         }
-        private void fahrzeugeListBox_DoubleClick(object sender, EventArgs e)
-        {
-            using (FahrzeugForm fahrzeugForm = new FahrzeugForm())
-            {
-                bool kennzeichenVorhanden;
-
-                Fahrzeug fahrzeug = null;
-
-                foreach (Parkplatz parkplatz in (parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus).Parkplätze)
-                {
-                    if (parkplatz.Stellplatznummer.Equals(fahrzeugeListBox.SelectedItem.ToString().Split(':')))
-                        fahrzeug = parkplatz.Fahrzeug;
-                }
-
-                if (fahrzeug != null)
-                {
-                    fahrzeugForm.Fahrzeug = fahrzeug;
-
-                    do
-                    {
-                        kennzeichenVorhanden = false;
-                        fahrzeugForm.ShowDialog();
-
-                        if (fahrzeugForm.Fahrzeug != null)
-                        {
-                            foreach (Fahrzeug fahrzeug1 in fahrzeugVerwaltung.Fahrzeuge)
-                            {
-                                if (fahrzeug1.Kennzeichen == fahrzeugForm.Fahrzeug.Kennzeichen && fahrzeug1 != fahrzeug)
-                                    kennzeichenVorhanden = true;
-                            }
-
-                            if (!kennzeichenVorhanden)
-                            {
-                                fahrzeugVerwaltung.Fahrzeuge[fahrzeugVerwaltung.Fahrzeuge.IndexOf(fahrzeug)] = fahrzeugForm.Fahrzeug;
-
-                                fahrzeugeKennzeichenSucheTextBox.Text = "";
-                                fahrzeugeCurrencyManager.Refresh();
-                                gesammteSteuerschuldTextBox.Text = fahrzeugVerwaltung.GesammteSteuerschuldBerechnen().ToString() + " €";
-                            }
-                            else
-                            {
-                                MessageBox.Show("Das Kennzeichen ist bereits vergeben!");
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Das Kennzeichen ist bereits vergeben!");
-                        }
-                    }
-                    while (kennzeichenVorhanden);
-                }
-            }
-        }
-
         private void parkplatzZuweisenButton_Click(object sender, EventArgs e)
         {
-            using (FahrzeugAuswahl fahrzeugAuswahl = new FahrzeugAuswahl())
+            using (FahrzeugAuswahlForm fahrzeugAuswahl = new FahrzeugAuswahlForm())
             {
                 bool fahrzeugBereitsAbgestellt = false;
 
@@ -399,7 +387,10 @@ namespace Fahrzeugverleih
                     {
                         for (int j = 0; j < parkhausVerwaltung.Parkhäuser[i].Parkplätze.Count; j++)
                         {
-                            if (parkhausVerwaltung.Parkhäuser[i].Parkplätze[j].Fahrzeug.Kennzeichen == fahrzeugAuswahl.Fahrzeug.Kennzeichen)
+                            if (fahrzeugAuswahl.Fahrzeug == null)
+                                fahrzeugBereitsAbgestellt = false;
+
+                            else if (parkhausVerwaltung.Parkhäuser[i].Parkplätze[j].Kennzeichen == fahrzeugAuswahl.Fahrzeug.Kennzeichen)
                             {
                                 fahrzeugBereitsAbgestellt = true;
                                 j = parkhausVerwaltung.Parkhäuser[i].Parkplätze.Count;
@@ -416,7 +407,7 @@ namespace Fahrzeugverleih
                             {
                                 if (((parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus).Parkplätze[i].ParkplatzTyp.Equals(ParkplatzTyp.PKW) && fahrzeugAuswahl.Fahrzeug is PKW) || ((parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus).Parkplätze[i].ParkplatzTyp.Equals(ParkplatzTyp.LKW) && fahrzeugAuswahl.Fahrzeug is LKW) || ((parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus).Parkplätze[i].ParkplatzTyp.Equals(ParkplatzTyp.Motorrad) && fahrzeugAuswahl.Fahrzeug is Motorrad))
                                 {
-                                    parkhausVerwaltung.Parkhäuser[parkhäuserDataGridView.CurrentRow.Index].Parkplätze[i].Fahrzeug = fahrzeugAuswahl.Fahrzeug;
+                                    parkhausVerwaltung.Parkhäuser[parkhäuserDataGridView.CurrentRow.Index].Parkplätze[i].Kennzeichen = fahrzeugAuswahl.Fahrzeug.Kennzeichen;
 
                                     i = (parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus).Parkplätze.Count;
 
@@ -442,15 +433,35 @@ namespace Fahrzeugverleih
         {
             if (parkhäuserDataGridView.CurrentRow.Index >= 0 && fahrzeugeListBox.SelectedIndex >= 0 && MessageBox.Show("Sind Sie sich sicher, dass Sie dieses Fahrzeug von dem Parkplatz trennen wollen?", "Parkplatz trennen?", MessageBoxButtons.YesNo).Equals(DialogResult.Yes))
             {
-                if (parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus)].Parkplätze[fahrzeugeListBox.SelectedIndex].Fahrzeug is PKW)
-                    parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus)].Parkplätze[fahrzeugeListBox.SelectedIndex].Fahrzeug = new PKW();
-                else if (parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus)].Parkplätze[fahrzeugeListBox.SelectedIndex].Fahrzeug is LKW)
-                    parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus)].Parkplätze[fahrzeugeListBox.SelectedIndex].Fahrzeug = new LKW();
-                else
-                    parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus)].Parkplätze[fahrzeugeListBox.SelectedIndex].Fahrzeug = new Motorrad();
+                parkhausVerwaltung.Parkhäuser[parkhausVerwaltung.Parkhäuser.IndexOf(parkhäuserDataGridView.CurrentRow.DataBoundItem as Parkhaus)].Parkplätze[fahrzeugeListBox.SelectedIndex].Kennzeichen = "";
 
                 parkhäuserDataGridView_SelectionChanged(sender, e);
                 parkhäuserCurrencyManager.Refresh();
+            }
+        }
+        private void fahrzeugeListBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (fahrzeugeListBox.SelectedItem != null)
+            {
+                foreach (Fahrzeug fahrzeug in fahrzeugVerwaltung.Fahrzeuge)
+                {
+                    if (fahrzeugeListBox.SelectedItem.ToString().Split(' ')[1] == fahrzeug.Kennzeichen)
+                    {
+                        tabControl.SelectTab(0);
+                        fahrzeugeKennzeichenSucheTextBox.Text = fahrzeug.Kennzeichen;
+
+                        for (int i = 0; i < fahrzeugeDataGridView.Rows.Count; i++)
+                        {
+                            if (fahrzeugeDataGridView.Rows[i].Cells[0].Value.ToString() == fahrzeug.Kennzeichen)
+                            {
+                                fahrzeugeDataGridView.Rows[i].Selected = true;
+                                fahrzeugeDataGridView_DoubleClick(new object(), new EventArgs());
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
             }
         }
         #endregion

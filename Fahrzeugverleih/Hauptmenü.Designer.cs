@@ -43,11 +43,11 @@
             this.gesammteSteuerschuldTextBox = new System.Windows.Forms.TextBox();
             this.fahrzeugeDataGridView = new System.Windows.Forms.DataGridView();
             this.parkhäuserTabPage = new System.Windows.Forms.TabPage();
+            this.parkplatzTrennenButton = new System.Windows.Forms.Button();
+            this.parkplatzZuweisenButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.parkhäuserKennzeichenSucheTextBox = new System.Windows.Forms.TextBox();
             this.parkhäuserDataGridView = new System.Windows.Forms.DataGridView();
-            this.parkplatzZuweisenButton = new System.Windows.Forms.Button();
-            this.parkplatzTrennenButton = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.fahrzeugeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fahrzeugeDataGridView)).BeginInit();
@@ -232,6 +232,30 @@
             this.parkhäuserTabPage.Text = "Parkhäuser";
             this.parkhäuserTabPage.UseVisualStyleBackColor = true;
             // 
+            // parkplatzTrennenButton
+            // 
+            this.parkplatzTrennenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.parkplatzTrennenButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.parkplatzTrennenButton.Location = new System.Drawing.Point(682, 314);
+            this.parkplatzTrennenButton.Name = "parkplatzTrennenButton";
+            this.parkplatzTrennenButton.Size = new System.Drawing.Size(115, 50);
+            this.parkplatzTrennenButton.TabIndex = 3;
+            this.parkplatzTrennenButton.Text = "Parkplatz trennen";
+            this.parkplatzTrennenButton.UseVisualStyleBackColor = true;
+            this.parkplatzTrennenButton.Click += new System.EventHandler(this.parkplatzTrennenButton_Click);
+            // 
+            // parkplatzZuweisenButton
+            // 
+            this.parkplatzZuweisenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.parkplatzZuweisenButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.parkplatzZuweisenButton.Location = new System.Drawing.Point(561, 314);
+            this.parkplatzZuweisenButton.Name = "parkplatzZuweisenButton";
+            this.parkplatzZuweisenButton.Size = new System.Drawing.Size(115, 50);
+            this.parkplatzZuweisenButton.TabIndex = 2;
+            this.parkplatzZuweisenButton.Text = "Parkplatz zuweisen";
+            this.parkplatzZuweisenButton.UseVisualStyleBackColor = true;
+            this.parkplatzZuweisenButton.Click += new System.EventHandler(this.parkplatzZuweisenButton_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -282,30 +306,6 @@
             this.parkhäuserDataGridView.TabIndex = 0;
             this.parkhäuserDataGridView.SelectionChanged += new System.EventHandler(this.parkhäuserDataGridView_SelectionChanged);
             this.parkhäuserDataGridView.DoubleClick += new System.EventHandler(this.parkhäuserDataGridView_DoubleClick);
-            // 
-            // parkplatzZuweisenButton
-            // 
-            this.parkplatzZuweisenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parkplatzZuweisenButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.parkplatzZuweisenButton.Location = new System.Drawing.Point(561, 314);
-            this.parkplatzZuweisenButton.Name = "parkplatzZuweisenButton";
-            this.parkplatzZuweisenButton.Size = new System.Drawing.Size(115, 50);
-            this.parkplatzZuweisenButton.TabIndex = 2;
-            this.parkplatzZuweisenButton.Text = "Parkplatz zuweisen";
-            this.parkplatzZuweisenButton.UseVisualStyleBackColor = true;
-            this.parkplatzZuweisenButton.Click += new System.EventHandler(this.parkplatzZuweisenButton_Click);
-            // 
-            // parkplatzTrennenButton
-            // 
-            this.parkplatzTrennenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.parkplatzTrennenButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.parkplatzTrennenButton.Location = new System.Drawing.Point(682, 314);
-            this.parkplatzTrennenButton.Name = "parkplatzTrennenButton";
-            this.parkplatzTrennenButton.Size = new System.Drawing.Size(115, 50);
-            this.parkplatzTrennenButton.TabIndex = 3;
-            this.parkplatzTrennenButton.Text = "Parkplatz trennen";
-            this.parkplatzTrennenButton.UseVisualStyleBackColor = true;
-            this.parkplatzTrennenButton.Click += new System.EventHandler(this.parkplatzTrennenButton_Click);
             // 
             // HauptmenüForm
             // 

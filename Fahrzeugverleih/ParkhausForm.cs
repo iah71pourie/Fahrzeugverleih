@@ -77,17 +77,17 @@ namespace Fahrzeugverleih
                     for (int j = 0; j < Convert.ToInt32(pkwParkplätzeTextBox.Text); j++)
                     {
                         parkhaus.Parkplätze.Add(new Parkplatz(ParkplatzTyp.PKW));
-                        parkhaus.Parkplätze[j].Stellplatznummer += (j + 1).ToString();
+                        parkhaus.Parkplätze[j].Stellplatznummer = "P" + (j + 1).ToString();
                     }
                     for (int j = 0; j < Convert.ToInt32(lkwParkplätzeTextBox.Text); j++)
                     {
                         parkhaus.Parkplätze.Add(new Parkplatz(ParkplatzTyp.LKW));
-                        parkhaus.Parkplätze[j + Convert.ToInt32(pkwParkplätzeTextBox.Text)].Stellplatznummer += (j + 1).ToString();
+                        parkhaus.Parkplätze[j + Convert.ToInt32(pkwParkplätzeTextBox.Text)].Stellplatznummer = "L" + (j + 1).ToString();
                     }
                     for (int j = 0; j < Convert.ToInt32(motorradParkplätzeTextBox.Text); j++)
                     {
                         parkhaus.Parkplätze.Add(new Parkplatz(ParkplatzTyp.Motorrad));
-                        parkhaus.Parkplätze[j + Convert.ToInt32(pkwParkplätzeTextBox.Text) + Convert.ToInt32(lkwParkplätzeTextBox.Text)].Stellplatznummer += (j + 1).ToString();
+                        parkhaus.Parkplätze[j + Convert.ToInt32(pkwParkplätzeTextBox.Text) + Convert.ToInt32(lkwParkplätzeTextBox.Text)].Stellplatznummer = "M" + (j + 1).ToString();
                     }
 
                     this.Close();
